@@ -9,6 +9,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="styles/loginRegister.css/loginR.css" />
     <title data-lang="title">Document</title>
   </head>
   <body>
@@ -30,13 +31,21 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#" data-lang="home">Home</a>
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="#"
+                  data-lang="home"
+                  >Home</a
+                >
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#" data-lang="festivals">Festivals</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" data-lang="conferences">Conferences</a>
+                <a class="nav-link" href="#" data-lang="conferences"
+                  >Conferences</a
+                >
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#" data-lang="sports">Sports</a>
@@ -45,22 +54,118 @@
           </div>
           <div class="login">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" aria-disabled="true" data-lang="es/en">ES/EN</a>
-                  </li>
               <li class="nav-item">
-                <a class="nav-link" aria-disabled="true" data-lang="login">Login/Register</a>
+                <a id="logR" href="#" class="nav-link" aria-disabled="true" data-lang="login"
+                >Login/Register</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link change-language" aria-disabled="true" data-lang="es/en" href="#"
+                  >ES/EN</a
+                >
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
+    <div id="modalContent" class="modalContent initial_disabled">
+      <div class="contentMain">
+        <div class="contentForm">
+          <div class="formLogin">
+            <form
+              id="formLogin"
+              class="d-flex flex-column align-content-center justify-content-center"
+            >
+              <div class="icon">
+                <ion-icon id="icon" name="log-in"></ion-icon>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingInput"
+                  placeholder="name@example.com"
+                />
+                <label data-lang="emailImput" for="floatingInput">Email address</label>
+                <div data-lang="emailHelp" id="emailHelp" class="form-text">
+                  We'll never share your email with anyone else.
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingPassword"
+                  placeholder="password"
+                />
+                <label data-lang="passwordImput" for="floatingPassword">Password</label>
+              </div>
+              <button data-lang="submit" type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
 
+          <div class="formRegister">
+            <form
+              id="formRegister"
+              class="d-flex flex-column align-content-center justify-content-center"
+            >
+              <div class="icon">
+                <ion-icon id="icon" name="person-add"></ion-icon>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingInput"
+                  placeholder="name@example.com"
+                />
+                <label data-lang="username" for="floatingInput">Username</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingInput"
+                  placeholder="name@example.com"
+                />
+                <label data-lang="emailImput" for="floatingInput">Email address</label>
+                <div data-lang="emailHelp" id="emailHelp" class="form-text">
+                  We'll never share your email with anyone else.
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingPassword"
+                  placeholder="password"
+                />
+                <label data-lang="passwordImput" for="floatingPassword">Password</label>
+              </div>
+              <button data-lang="submit" type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div id="interactive" class="interactive initialR">
+            <a id="logRClosed" href="#">x</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="js/loginR.js"></script>
+    <script src="js/traslator.js"></script>
   </body>
 </html>
