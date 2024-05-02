@@ -5,5 +5,10 @@
   "conferences": "Conferences",
   "sports": "Sports",
   "es/en": "ES",
-  "login": "Login/Register"
+  "login": "Login/Register",
+  "emailHelp":"We'll never share your email with anyone else.",
+  "emailImput":"Email address",
+  "passwordImput":"Password",
+  "submit":"Submit",
+  "username":"Username"
 }
