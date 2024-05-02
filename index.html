@@ -76,6 +76,90 @@
         </div>
       </nav>
     </header>
+    <div id="modalContent" class="modalContent initial_disabled">
+      <div class="contentMain">
+        <div class="contentForm">
+          <div class="formLogin">
+            <form
+              id="formLogin"
+              class="d-flex flex-column align-content-center justify-content-center"
+            >
+              <div class="icon">
+                <ion-icon id="icon" name="log-in"></ion-icon>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingInput"
+                  placeholder="name@example.com"
+                  />
+                  <label data-lang="emailImput" for="floatingInput">Email address</label>
+                <div data-lang="emailHelp" id="emailHelp" class="form-text">
+                  We'll never share your email with anyone else.
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                type="password"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="password"
+                />
+                <label data-lang="passwordImput" for="floatingPassword">Password</label>
+              </div>
+              <button data-lang="submit" type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          
+          
+          <div class="formRegister">
+            <form
+            id="formRegister"
+            class="d-flex flex-column align-content-center justify-content-center"
+            >
+              <div class="icon">
+                <ion-icon id="icon" name="person-add"></ion-icon>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                type="email"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+                />
+                <label data-lang="username" for="floatingInput">Username</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                type="email"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+                />
+                <label data-lang="emailImput" for="floatingInput">Email address</label>
+                <div data-lang="emailHelp" id="emailHelp" class="form-text">
+                  We'll never share your email with anyone else.
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                type="password"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="password"
+                />
+                <label data-lang="passwordImput" for="floatingPassword">Password</label>
+              </div>
+              <button data-lang="submit" type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div id="interactive" class="interactive initialR">
+            <a id="logRClosed" href="#">x</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div
       id="carouselExampleSlidesOnly"
       class="carousel slide"
@@ -103,131 +187,41 @@
       
     </div>
     <div class="newsLetter bg-black">
-      <div class="container">
-        <h1 class="p-5 titleNewletter text-light">MANTENME AL DIA</h1>
-        <div class="container d-flex p-3 bg-newsletter">
+      <div class="container ">
+        <h1 class="pt-5 titleNewletter text-light">MANTENME AL DIA</h1>
+        <div class="container d-flex p-5 bg-newsletter h-50 gap-5">
           <div class="w-50">
             <p>
               Con los últimos conciertos y eventos. Regístrate para recibir el boletín informativo.
             </p>
           </div>
-          <form class="d-flex justify-content-center w-75 h-25 align-items-center">
+          <form class="d-flex justify-content-center w-75 h-25 align-items-center gap-5">
             <div class="w-75 d-flex justify-content-center align-items-center">
-              <label for="exampleInputEmail1" class="form-label"
-                >Email address</label
-              >
               <input
                 type="email"
-                class="form-control"
-                id="exampleInputEmail1"
+                class="form-control border border-dark border-3"
+                id="email-newsLetter"
                 aria-describedby="emailHelp"
+                placeholder=" Ingresa tu email"
+              
               />
-              <div id="emailHelp" class="form-text">
-                We'll never share your email with anyone else.
-              </div>
+            
             </div>
-            <button type="submit" class="btn btn-primary h-100">Subscribe</button>
+            <button type="submit" class="subscribe border border-dark border-3 h-100 px-5 py-1">Subscribe</button>
           </form>
         </div>
       </div>
     </div>
-    
-        <footer class="py-3 bg-black">
-          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Festivals</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Conferences</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">About</a></li>
-          </ul>
-          <p class="text-center text-light">© 2024 ALL VIBE, Inc</p>
+    <footer class="py-3 bg-black">
+     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Festivals</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Conferences</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">About</a></li>
+      </ul>
+      <p class="text-center text-light">© 2024 ALL VIBE, Inc</p>
         </footer>
-      
-
-    <div id="modalContent" class="modalContent initial_disabled">
-      <div class="contentMain">
-        <div class="contentForm">
-          <div class="formLogin">
-            <form
-              id="formLogin"
-              class="d-flex flex-column align-content-center justify-content-center"
-            >
-              <div class="icon">
-                <ion-icon id="icon" name="log-in"></ion-icon>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                />
-                <label data-lang="emailImput" for="floatingInput">Email address</label>
-                <div data-lang="emailHelp" id="emailHelp" class="form-text">
-                  We'll never share your email with anyone else.
-                </div>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="floatingPassword"
-                  placeholder="password"
-                />
-                <label data-lang="passwordImput" for="floatingPassword">Password</label>
-              </div>
-              <button data-lang="submit" type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-
-
-          <div class="formRegister">
-            <form
-              id="formRegister"
-              class="d-flex flex-column align-content-center justify-content-center"
-            >
-              <div class="icon">
-                <ion-icon id="icon" name="person-add"></ion-icon>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                />
-                <label data-lang="username" for="floatingInput">Username</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                />
-                <label data-lang="emailImput" for="floatingInput">Email address</label>
-                <div data-lang="emailHelp" id="emailHelp" class="form-text">
-                  We'll never share your email with anyone else.
-                </div>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="floatingPassword"
-                  placeholder="password"
-                />
-                <label data-lang="passwordImput" for="floatingPassword">Password</label>
-              </div>
-              <button data-lang="submit" type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-          <div id="interactive" class="interactive initialR">
-            <a id="logRClosed" href="#">x</a>
-          </div>
-        </div>
-      </div>
-    </div>
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"

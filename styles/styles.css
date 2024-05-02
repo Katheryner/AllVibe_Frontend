@@ -23,9 +23,44 @@ header{
 
 .titleNewletter{
     font-size: 3rem;
-    font-weight: 400;
+    font-weight: bolder;
 }
 
 .bg-newsletter{
     background: #FC9779;
+    position: relative;
+}
+
+.bg-newsletter::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36%;
+    border: 9px solid #fff;
+    z-index: 2;
+}
+
+.bg-newsletter::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 36%;
+    border: 9px solid #fff;
+    z-index: 2;
+}
+
+#email-newsLetter{
+    border-radius: 0%;
+}
+
+.subscribe{
+    background: #FC9779;
+    transition: 0.5s;
+}
+.subscribe:hover {
+    background-color: black;
+    color: #FC9779;
+    
 }
