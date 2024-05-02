@@ -20,3 +20,12 @@ header{
 .nav-link:hover{
     color: #FC9779 !important;
 }
+
+.titleNewletter{
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.bg-newsletter{
+    background: #FC9779;
+}
