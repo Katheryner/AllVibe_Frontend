@@ -1,36 +1,46 @@
+const signUpButton = document.getElementById("signUp");
+const signInButton = document.getElementById("signIn");
+const container = document.getElementById("container");
+
+signUpButton.addEventListener("click", () => {
+  container.classList.add("right-panel-activeM");
+});
+
+signInButton.addEventListener("click", () => {
+  container.classList.remove("right-panel-activeM");
+});
+
 const modal = document.getElementById("modalContent");
 const logR = document.getElementById("logR");
-const logClosed = document.getElementById("logRClosed");
-const move = document.getElementById("interactive");
-let movido = false;
+const logClosed = document.getElementById("logC");
+const logC = document.getElementById("logCd");
+
 logR.addEventListener("click", (e) => {
-  
+  console.log("object");
   e.preventDefault();
-  
-  if (modal.classList.contains("initial_disabled")) {
+
+  if (
+    modal.classList.contains("initial_disabled") ||
+    modal.classList.contains("disebled_")
+  ) {
     modal.classList.remove("initial_disabled");
+    modal.classList.add("disebled_");
     modal.classList.add("action_look");
   }
 });
 logClosed.addEventListener("click", (e) => {
   console.log("object");
   e.preventDefault();
-  console.log("object");
   if (modal.classList.contains("action_look")) {
     modal.classList.add("initial_disabled");
     modal.classList.remove("action_look");
   }
 });
-
-move.addEventListener("click", function () {
+logC.addEventListener("click", (e) => {
   console.log("object");
-        if (!movido) {
-            move.style.transform = "translate(-550px)";
-        } else {
-            move.style.transform = "translate(0px)";
-        }
-        movido = !movido;
-    });
-
-
-
+  e.preventDefault();
+  if (modal.classList.contains("action_look")) {
+    modal.classList.add("initial_disabled");
+    modal.classList.remove("action_look");
+  }
+});
