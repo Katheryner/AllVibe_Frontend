@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="../styles/styles.css" />
     <link rel="stylesheet" href="/styles/loginRegister/log.css" />
+    <link rel="stylesheet" href="/styles/conferences.css" />
     <title>Conferences</title>
   </head>
   <body class="vh-100">
@@ -57,7 +58,9 @@
             </ul>
           </div>
           <div class="logo">
-            <a class="navbar-brand text-light" href="#">Logo</a>
+            <a class="navbar-brand text-light" href="/index.html"
+              ><img src="/img/logoAmo.png" alt=""
+            /></a>
           </div>
           <div class="login">
             <ul class="navbar-nav">
@@ -127,8 +130,197 @@
         </div>
       </div>
     </div>
-    <!-- provisional se debe cambiar la clase -->
-    <div class="contenido vw-100 vh-100"></div>
+
+    <!-- Contenido principal (Main) -->
+    <div class="principal-container">
+      <div class="principal-content">
+        <div id="title1">
+          <div id="title-main">
+            <span> <h1>CONFERENCE</h1></span>
+          </div>
+          <div id="fondo-title1"></div>
+          <div>
+            <div
+              data-testid="svgRoot-comp-jmstwcri"
+              class="aizuI7 TcoJIb comp-jmstwcri path1"
+            >
+              <svg
+                preserveAspectRatio="none"
+                data-bbox="61.9 10.1 76.2 179.8"
+                viewBox="61.9 10.1 76.2 179.8"
+                height="200"
+                width="200"
+                xmlns="http://www.w3.org/2000/svg"
+                data-type="shape"
+                role="presentation"
+                aria-hidden="true"
+              >
+                <g>
+                  <path
+                    d="M62 174.1l8.8 15.8h-4l-4.9-8.7v-7.1h.1zm0-11.1l14.9 26.8h4l-18.9-34v7.2zm0-18.1l25 45h4l-29-52.1v7.1zm0-18.1l35.1 63.1h4L62 119.7v7.1zm0-18.2l45.2 81.2h4L62 101.5v7.1zm0-18.1l55.3 99.4h4L62 83.4v7.1zm0-18.1l65.4 117.5h4L62 65.3v7.1zm0-18.2l75.5 135.6h.6v-6.1L62 47.1v7.1zm0-18.1l76 136.6v-7.1L62 29v7.1zM62 18l76 136.6v-7.1L62 10.9V18zm5.7-7.9L138 136.5v-7.1L71.6 10.1h-3.9zm10.1 0L138 118.3v-7.1L81.7 10.1h-3.9zm10.1 0l50.2 90.1v-7.1l-46.2-83h-4zm10.1 0l40.1 72V75L102 10.1h-4zm10.1 0L138 64v-7.1l-26-46.7h-3.9v-.1zm10.1 0L138 45.8v-7.1l-15.9-28.6h-3.9zm14 0h-4l9.8 17.6v-7.1l-5.8-10.5z"
+                  ></path>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- CARDS, copiar y pegar en JS al tener la api, inyectando el HTML para generar cada card -->
+        <div class="cards-content">
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Tarjeta 1 -->
+            <div class="col">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/img/piolin.png" alt="Imagen">
+                </div>
+                <div class="card-content">
+                  <h2 class="card-title">Título Corto</h2>
+                  <p class="card-description">Descripción de la noticia...</p>
+                </div>
+              </div>
+            </div>
+            <!-- Tarjeta 2 -->
+            <div class="col">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/img/piolin.png" alt="Imagen">
+                </div>
+                <div class="card-content">
+                  <h2 class="card-title">Título Largo que se Ajusta</h2>
+                  <p class="card-description">Descripción de la noticia...</p>
+                </div>
+              </div>
+            </div>
+            <!-- Tarjeta 3 -->
+            <div class="col">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/img/piolin.png" alt="Imagen">
+                </div>
+                <div class="card-content">
+                  <h2 class="card-title">Título Muy Largo que se Ajusta</h2>
+                  <p class="card-description">Descripción de la noticia...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tarjeta 4 -->
+            <div class="col">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/img/piolin.png" alt="Imagen">
+                </div>
+                <div class="card-content">
+                  <h2 class="card-title">Título Corto</h2>
+                  <p class="card-description">Descripción de la noticia...</p>
+                </div>
+              </div>
+            </div>
+            <!-- Tarjeta 5 -->
+            <div class="col">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/img/piolin.png" alt="Imagen">
+                </div>
+                <div class="card-content">
+                  <h2 class="card-title">Título Largo que se Ajusta</h2>
+                  <p class="card-description">Descripción de la noticia...</p>
+                </div>
+              </div>
+            </div>
+            <!-- Tarjeta 6 -->
+            <div class="col">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/img/piolin.png" alt="Imagen">
+                </div>
+                <div class="card-content">
+                  <h2 class="card-title">Título Muy Largo que se Ajusta</h2>
+                  <p class="card-description">Descripción de la noticia...</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Tarjeta 7 -->
+            <div class="col">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/img/piolin.png" alt="Imagen">
+                </div>
+                <div class="card-content">
+                  <h2 class="card-title">Título Corto</h2>
+                  <p class="card-description">Descripción de la noticia...</p>
+                </div>
+              </div>
+            </div>
+            <!-- Tarjeta 8 -->
+            <div class="col">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/img/piolin.png" alt="Imagen">
+                </div>
+                <div class="card-content">
+                  <h2 class="card-title">Título Largo que se Ajusta</h2>
+                  <p class="card-description">Descripción de la noticia...</p>
+                </div>
+              </div>
+            </div>
+            <!-- Tarjeta 9 -->
+            <div class="col">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/img/piolin.png" alt="Imagen">
+                </div>
+                <div class="card-content">
+                  <h2 class="card-title">Título Muy Largo que se Ajusta</h2>
+                  <p class="card-description">Descripción de la noticia...</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+
+    <div class="newsLetter bg-black">
+      <div class="container">
+        <h1 class="pt-5 titleNewletter text-light">MANTENME AL DIA</h1>
+        <div class="container d-flex p-5 bg-newsletter h-50 gap-5">
+          <div class="w-50">
+            <p>
+              Con los últimos conciertos y eventos. Regístrate para recibir el
+              boletín informativo.
+            </p>
+          </div>
+          <form
+            class="d-flex justify-content-center w-75 h-25 align-items-center gap-5"
+          >
+            <div class="w-75 d-flex justify-content-center align-items-center">
+              <input
+                type="email"
+                class="form-control border border-dark border-3"
+                id="email-newsLetter"
+                aria-describedby="emailHelp"
+                placeholder=" Ingresa tu email"
+              />
+            </div>
+            <button
+              type="submit"
+              class="subscribe border border-dark border-3 h-100 px-5 py-1"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <footer class="py-3 bg-black">
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
         <li class="nav-item">

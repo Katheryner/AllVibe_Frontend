@@ -1,0 +1,109 @@
+body {
+  background-color: #000;
+}
+
+.principal-container {
+  width: 65%;
+  height: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 35px auto;
+  border: 1px red solid;
+}
+
+.principal-content {
+  height: 90%;
+  width: 100%;
+  margin: 20px;
+}
+
+#title1 {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  row-gap: 10px;
+}
+
+#title-main {
+  background-color: white;
+  width: 35%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding-right: 3px;
+}
+
+h1 {
+  text-align: right;
+  font-size: 2vw;
+  font-weight: 600;
+}
+
+#fondo-title1 {
+  background-color: #fc9779;
+  height: 5vh;
+  width: 15%;
+  margin-top: 20px;
+}
+
+.path1 {
+  background-color: #fc9779;
+  height: 5vh;
+  width: 10%;
+  margin-top: 20px;
+}
+
+.cards-content {
+    margin-top: 10%;
+  }
+  
+  .card {
+    border: none;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+    width: 90%; /* Reducir el ancho de las tarjetas */
+    margin: auto; /* Centrar las tarjetas */
+  }
+  
+  .card-image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    padding: 20px;
+  }
+  
+  .card-title {
+    margin-top: 0;
+    transition: transform 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .card:hover .card-title {
+    transform: translateY(-100%);
+  }
+  
+  .card:hover .card-description {
+    display: block;
+  }
+  
+  .row-cols-1.row-cols-md-3.g-4 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar las columnas */
+  }
+  
+  .col {
+    flex: 0 0 30%; /* Ajustar el ancho de las columnas */
+    max-width: 30%; /* Ajustar el ancho máximo de las columnas */
+    margin: 10px; /* Agregar margen entre las columnas */
+  }
+  
