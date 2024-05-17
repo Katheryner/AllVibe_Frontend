@@ -44,3 +44,70 @@ logC.addEventListener("click", (e) => {
     modal.classList.remove("action_look");
   }
 });
+
+
+
+document.getElementById('signupForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('emailRegister').value;
+  const password = document.getElementById('passwordRegister').value;
+  registerUser(username, email, password);
+});
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const email = document.getElementById('emailLogin').value;
+  const password = document.getElementById('passwordLogin').value;
+  loginUser(email, password);
+});
+
+
+// Función para registrar un nuevo usuario
+function registerUser(username, email, password) {
+  fetch('http://localhost:3000/auth/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: username,
+      email: email,
+      password: password
+    }),
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log('Registro exitoso');
+    } else {
+      console.error('Error en el registro');
+    }
+  })
+  .catch(error => {
+    console.error('Error de red:', error);
+  });
+}
+
+// Función para iniciar sesión
+function loginUser(email, password) {
+  fetch('http://localhost:3000/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password
+    }),
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log('Inicio de sesión exitoso');
+    } else {
+      console.error('Error en el inicio de sesión');
+    }
+  })
+  .catch(error => {
+    console.error('Error de red:', error);
+  });
+}
