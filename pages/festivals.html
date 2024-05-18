@@ -52,46 +52,46 @@
     </nav>
   </header>
   <div id="modalContent" class="modalContent disebled_">
-      <div class="containerM" id="container">
-        <div class="form-containerM sign-up-containerM">
-          <form action="#">
-            <a href="#" id="logC">x</a>
-            <h2 data-lang="create-account" >Create Account</h2>
-            <span data-lang="infoLog">or use your email for registration</span>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button data-lang="button-signUp">Sign Up</button>
-          </form>
-        </div>
-        <div class="form-containerM sign-in-containerM">
-          <form action="#">
-            <a href="#" id="logCd">x</a>
-            <h2 data-lang="signIn">Sign in</h2>
-            <span data-lang="infoLog2" >or use your account</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button data-lang="button-signIn">Sign In</button>
-          </form>
-        </div>
-        <div class="overlay-containerM">
-          <div class="overlayM">
-            <div class="overlay-panelM overlay-leftM">
-              <h2 data-lang="welcome">Welcome Back!</h2>
-              <p data-lang="infolog3">
-                To keep connected with us please login with your personal info
-              </p>
-              <button data-lang="signIn" class="ghostM" id="signIn">Sign In</button>
-            </div>
-            <div class="overlay-panelM overlay-rightM">
-              <h2 data-lang="hello">Hello, Friend!</h2>
-              <p data-lang="infolog4">Enter your personal details and start journey with us</p>
-              <button data-lang="create-account" class="ghostM" id="signUp">Sign Up</button>
-            </div>
+    <div class="containerM" id="container">
+      <div class="form-containerM sign-up-containerM">
+        <form action="#">
+          <a href="#" id="logC">x</a>
+          <h2 data-lang="create-account" >Create Account</h2>
+          <span data-lang="infoLog">or use your email for registration</span>
+          <input type="text" placeholder="Name" id="username"/>
+          <input type="email" placeholder="Email" id="emailRegister"/>
+          <input type="password" placeholder="Password" id="passwordRegister"/>
+          <button data-lang="button-signUp">Sign Up</button>
+        </form>
+      </div>
+      <div class="form-containerM sign-in-containerM">
+        <form action="#">
+          <a href="#" id="logCd">x</a>
+          <h2 data-lang="signIn">Sign in</h2>
+          <span data-lang="infoLog2" >or use your account</span>
+          <input type="email" placeholder="Email" id="emailLogin"/>
+          <input type="password" placeholder="Password" id="passwordLogin"/>
+          <button data-lang="button-signIn">Sign In</button>
+        </form>
+      </div>
+      <div class="overlay-containerM">
+        <div class="overlayM">
+          <div class="overlay-panelM overlay-leftM">
+            <h2 data-lang="welcome">Welcome Back!</h2>
+            <p data-lang="infolog3">
+              To keep connected with us please login with your personal info
+            </p>
+            <button class="ghostM" id="signIn" data-lang="signIn">Sign In</button>
+          </div>
+          <div class="overlay-panelM overlay-rightM">
+            <h2 data-lang="hello">Hello, Friend!</h2>
+            <p data-lang="infolog4">Enter your personal details and start journey with us</p>
+            <button data-lang="create-account" class="ghostM" id="signUp">Sign Up</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
   <!-- Contenido principal (Main) -->
   <div class="principal-container">
