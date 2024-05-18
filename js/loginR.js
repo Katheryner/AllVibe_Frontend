@@ -79,7 +79,7 @@ async function handleSubmit(e) {
    
     if (response.ok) {
       console.log('Registro exitoso');
-     
+     await saveUser(formData);
 
     } else {
       console.error('Error en el registro uno');
@@ -129,6 +129,27 @@ async function handleLogin(e) {
   }
 }
 
+
+async function saveUser(user) {
+  user.role = "USER";
+  try {
+    const response = await fetch('http://localhost:8080/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+      
+    });
+   
+    if (response.ok) {
+      console.log('success User');
+
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
 
 
 

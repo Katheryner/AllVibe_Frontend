@@ -1,10 +1,11 @@
+//variables
 const tables = document.querySelector("#tables");
 const eventsButtton = document.querySelector("#events-buttton");
 const participationsButtton = document.querySelector("#participations-buttton");
 const usersButtton = document.querySelector("#users-buttton");
 const createEventButton = document.querySelector("#saveEvent");
 const createPartButton = document.querySelector("#saveParticipation");
-
+//listeners
 document.addEventListener("DOMContentLoaded", () => {
   printEvents();
 });
@@ -25,6 +26,9 @@ createPartButton.addEventListener("click", () => {
   saveParticipation();
 });
 
+//functions
+
+//FetchAPIs
 async function consumirAPIEvents() {
   try {
     const URL = "http://localhost:8080/api/v1/events";
@@ -57,6 +61,8 @@ async function consumirAPIUsers() {
     console.error("Error:", error);
   }
 }
+
+//prints
 
 async function printEvents() {
   const data = await consumirAPIEvents();
@@ -160,7 +166,7 @@ async function printParticipations() {
 
   tables.querySelector("#modalPartButton").addEventListener("click", () => {
     printEventInSelect();
-    printusersInSelect();
+    printUsersInSelect();
   });
 
   data["content"].forEach((eventPart) => {
@@ -218,6 +224,67 @@ function cleanHTML(element) {
     element.removeChild(element.firstChild);
   }
 }
+
+async function printEventInSelect() {
+  const selectEvent = document.querySelector("#eventParticipation");
+  cleanHTML(selectEvent);
+  selectEvent.innerHTML += `
+    <option selected>Select Event</option>
+  `;
+  const data = await consumirAPIEvents();
+  data["content"].forEach((event) => {
+    selectEvent.innerHTML += `
+    <option value="${event.id}">${event.name}</option>
+          `;
+  });
+}
+
+async function printUsersInSelect() {
+  const selectUser = document.querySelector("#userParticipation");
+  cleanHTML(selectUser);
+  selectUser.innerHTML += `
+    <option selected>Select User</option>
+  `;
+  const data = await consumirAPIUsers();
+  data["content"].forEach((user) => {
+    selectUser.innerHTML += `
+    <option value="${user.id}">${user.username}</option>
+          `;
+  });
+}
+
+async function printFormEvent(id) {
+  const modalElement = document.getElementById("modalEvent");
+  const modalInstance = new bootstrap.Modal(modalElement);
+  modalInstance.show();
+  const data = await getEventById(id);
+  console.log(data);
+  dateFormat = new Date(data.date).toISOString().split("T")[0];
+  document.getElementById("eventId").value = data.id;
+  document.getElementById("nameEvent").value = data.name;
+  document.getElementById("placeEvent").value = data.place;
+  document.getElementById("dateEvent").value = dateFormat;
+  document.getElementById("capacityEvent").value = data.capacity;
+  document.getElementById("descriptionEvent").value = data.description;
+  document.getElementById("eventType").value = data.eventType;
+  document.getElementById("statusEvent").value = data.status;
+}
+
+async function printFormParticipation(id) {
+  const modalElement = document.getElementById("modalEventParticipation");
+  const modalInstance = new bootstrap.Modal(modalElement);
+  modalInstance.show();
+  const data = await getPartById(id);
+  console.log(data);
+  await printEventInSelect();
+  await printUsersInSelect();
+  document.getElementById("roleParticipant").value = data.participantRole;
+  document.getElementById("eventParticipation").value = data.simpleEventResponse.id;
+  document.getElementById("userParticipation").value = data.simpleUserResponse.id;
+  document.getElementById("partId").value = data.id;
+}
+
+//CRUDmethods
 
 async function saveEvent() {
   const name = document.getElementById("nameEvent").value;
@@ -306,34 +373,6 @@ async function saveParticipation() {
   } else {
     updateParticipation(id,participation);
   }
-}
-
-async function printEventInSelect() {
-  const selectEvent = document.querySelector("#eventParticipation");
-  cleanHTML(selectEvent);
-  selectEvent.innerHTML += `
-    <option selected>Select Event</option>
-  `;
-  const data = await consumirAPIEvents();
-  data["content"].forEach((event) => {
-    selectEvent.innerHTML += `
-    <option value="${event.id}">${event.name}</option>
-          `;
-  });
-}
-
-async function printusersInSelect() {
-  const selectUser = document.querySelector("#userParticipation");
-  cleanHTML(selectUser);
-  selectUser.innerHTML += `
-    <option selected>Select User</option>
-  `;
-  const data = await consumirAPIUsers();
-  data["content"].forEach((user) => {
-    selectUser.innerHTML += `
-    <option value="${user.id}">${user.username}</option>
-          `;
-  });
 }
 
 async function deleteEvent(eventId) {
@@ -448,33 +487,4 @@ async function getPartById(partId) {
   } catch (error) {
     console.error("Error fetching event:", error);
   }
-}
-
-async function printFormEvent(id) {
-  const modalElement = document.getElementById("modalEvent");
-  const modalInstance = new bootstrap.Modal(modalElement);
-  modalInstance.show();
-  const data = await getEventById(id);
-  console.log(data);
-  dateFormat = new Date(data.date).toISOString().split("T")[0];
-  document.getElementById("eventId").value = data.id;
-  document.getElementById("nameEvent").value = data.name;
-  document.getElementById("placeEvent").value = data.place;
-  document.getElementById("dateEvent").value = dateFormat;
-  document.getElementById("capacityEvent").value = data.capacity;
-  document.getElementById("descriptionEvent").value = data.description;
-  document.getElementById("eventType").value = data.eventType;
-  document.getElementById("statusEvent").value = data.status;
-}
-
-async function printFormParticipation(id) {
-  const modalElement = document.getElementById("modalEventParticipation");
-  const modalInstance = new bootstrap.Modal(modalElement);
-  modalInstance.show();
-  const data = await getPartById(id);
-  console.log(data);
-  document.getElementById("roleParticipant").value = data.participantRole;
-  // document.getElementById("eventParticipation").value = ;
-  // document.getElementById("userParticipation").value = ;
-  document.getElementById("partId").value = data.id;
 }
