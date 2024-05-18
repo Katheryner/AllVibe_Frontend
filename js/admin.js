@@ -18,33 +18,44 @@ participationsButtton.addEventListener("click", () => {
 });
 
 createEventButton.addEventListener("click", () => {
-  createEvent();
+  saveEvent();
 });
 
 createPartButton.addEventListener("click", () => {
-  createParticipation();
+  saveParticipation();
 });
 
 async function consumirAPIEvents() {
-  const URL = "http://localhost:8080/api/v1/events";
-  const response = await fetch(URL);
-  const data = await response.json();
-return data;
-  
+  try {
+    const URL = "http://localhost:8080/api/v1/events";
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 async function consumirAPIParticipations() {
-  const URL = "http://localhost:8080/api/v1/eventParticipation";
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
+  try {
+    const URL = "http://localhost:8080/api/v1/eventParticipation";
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 async function consumirAPIUsers() {
-  const URL = "http://localhost:8080/api/v1/users";
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
+  try {
+    const URL = "http://localhost:8080/api/v1/users";
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 async function printEvents() {
@@ -93,10 +104,10 @@ async function printEvents() {
               <td>${event.eventType}</td>
               <td>
                 <div class="d-flex gap-1">
-                  <a class="btn btn-primary" data-id=${event.id}>
+                  <a class="btn btn-primary edit" data-id=${event.id}>
                     <i class="bx bxs-edit-alt"></i>
                   </a>
-                  <a class="btn btn-danger" data-id=${event.id}>
+                  <a class="btn btn-danger delete" data-id=${event.id}>
                     <i class="bx bxs-trash"></i>
                   </a>
                 </div>
@@ -105,9 +116,22 @@ async function printEvents() {
           
         `;
   });
+
+  tables.querySelectorAll(".edit").forEach((button) => {
+    button.addEventListener("click", async function () {
+      const dataId = this.getAttribute("data-id");
+      printFormEvent(dataId);
+    });
+  });
+
+  tables.querySelectorAll(".delete").forEach((button) => {
+    button.addEventListener("click", async function () {
+      const dataId = this.getAttribute("data-id");
+      await deleteEvent(dataId);
+      printEvents();
+    });
+  });
 }
-
-
 
 async function printParticipations() {
   const data = await consumirAPIParticipations();
@@ -133,12 +157,12 @@ async function printParticipations() {
       </thead>
       <tbody></tbody>
       </table>`;
-  
-  tables.querySelector("#modalPartButton").addEventListener("click",()=>{
+
+  tables.querySelector("#modalPartButton").addEventListener("click", () => {
     printEventInSelect();
     printusersInSelect();
   });
-  
+
   data["content"].forEach((eventPart) => {
     const fecha = new Date(eventPart.simpleEventResponse.date);
 
@@ -161,10 +185,10 @@ async function printParticipations() {
                 <td>${eventPart.simpleEventResponse.eventType}</td>
                 <td>
                   <div class="d-flex gap-1">
-                    <a class="btn btn-primary" data-id=${eventPart.id}>
+                    <a class="btn btn-primary edit" data-id=${eventPart.id}>
                       <i class="bx bxs-edit-alt"></i>
                     </a>
-                    <a class="btn btn-danger" data-id=${eventPart.id}>
+                    <a class="btn btn-danger delete" data-id=${eventPart.id}>
                       <i class="bx bxs-trash"></i>
                     </a>
                   </div>
@@ -172,6 +196,20 @@ async function printParticipations() {
               </tr>
             
           `;
+  });
+  tables.querySelectorAll(".edit").forEach((button) => {
+    button.addEventListener("click", async function () {
+      const dataId = this.getAttribute("data-id");
+      printFormParticipation(dataId);
+    });
+  });
+
+  tables.querySelectorAll(".delete").forEach((button) => {
+    button.addEventListener("click", async function () {
+      const dataId = this.getAttribute("data-id");
+      await deleteParticipation(dataId);
+      printParticipations();
+    });
   });
 }
 
@@ -181,7 +219,7 @@ function cleanHTML(element) {
   }
 }
 
-async function createEvent() {
+async function saveEvent() {
   const name = document.getElementById("nameEvent").value;
   const place = document.getElementById("placeEvent").value;
   const dateInput = document.getElementById("dateEvent").value;
@@ -192,6 +230,8 @@ async function createEvent() {
 
   const date = new Date(dateInput).toISOString();
 
+  const id = document.getElementById("eventId").value;
+
   const event = {
     name,
     place,
@@ -199,55 +239,72 @@ async function createEvent() {
     capacity,
     description,
     eventType,
-    status
+    status,
   };
 
-  try {
-    const response = await fetch("http://localhost:8080/api/v1/events", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(event),
-    });
-    console.log(response);
+  if (!id) {
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(event),
+      });
+      console.log(response);
 
-    if (response.ok) {
-      console.log("Event added");
-    } else {
-      console.error("Error adding event");
+      if (response.ok) {
+        alert("Event added");
+        printEvents();
+      } else {
+        console.error("Error adding event");
+      }
+    } catch (error) {
+      console.error("Error adding event:", error);
     }
-  } catch (error) {
-    console.error("Error adding event:", error);
+  } else {
+    updateEvent(id, event);
   }
 }
 
-async function createParticipation() {
+async function saveParticipation() {
   const participantRole = document.getElementById("roleParticipant").value;
   const eventId = document.getElementById("eventParticipation").value;
   const userId = document.getElementById("userParticipation").value;
 
+  const id = document.getElementById("partId").value;
+
   const participation = {
-    participantRole, userId, eventId
+    participantRole,
+    userId,
+    eventId,
   };
 
-  try {
-    const response = await fetch("http://localhost:8080/api/v1/eventParticipation", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(participation),
-    });
-    console.log(response);
+  if (!id) {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/api/v1/eventParticipation",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(participation),
+        }
+      );
+      console.log(response);
 
-    if (response.ok) {
-      console.log("participation added");
-    } else {
-      console.error("Error adding participation");
+      if (response.ok) {
+        alert("participation added");
+        printParticipations();
+      } else {
+        console.error("Error adding participation");
+      }
+    } catch (error) {
+      console.error("Error adding participation:", error);
     }
-  } catch (error) {
-    console.error("Error adding participation:", error);
+  } else {
+    updateParticipation(id,participation);
   }
 }
 
@@ -263,7 +320,6 @@ async function printEventInSelect() {
     <option value="${event.id}">${event.name}</option>
           `;
   });
-
 }
 
 async function printusersInSelect() {
@@ -278,5 +334,147 @@ async function printusersInSelect() {
     <option value="${user.id}">${user.username}</option>
           `;
   });
+}
 
+async function deleteEvent(eventId) {
+  const URL = `http://localhost:8080/api/v1/events/${eventId}`;
+  try {
+    const response = await fetch(URL, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      alert("Event deleted");
+    } else {
+      console.error("Error deleting event");
+    }
+  } catch (error) {
+    console.error("Error deleting event:", error);
+  }
+}
+
+async function deleteParticipation(eventId) {
+  const URL = `http://localhost:8080/api/v1/eventParticipation/${eventId}`;
+  try {
+    const response = await fetch(URL, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      alert("Participation deleted");
+    } else {
+      console.error("Error deleting Participation");
+    }
+  } catch (error) {
+    console.error("Error deleting Participation:", error);
+  }
+}
+
+async function updateEvent(eventId, updatedEvent) {
+  const URL = `http://localhost:8080/api/v1/events/${eventId}`;
+  try {
+    const response = await fetch(URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedEvent),
+    });
+
+    if (response.ok) {
+      alert("Event updated");
+      printEvents();
+    } else {
+      console.error("Error updating event");
+    }
+  } catch (error) {
+    console.error("Error updating event:", error);
+  }
+}
+
+async function updateParticipation(partID, updatedParticipation) {
+  const URL = `http://localhost:8080/api/v1/eventParticipation/${partID}`;
+  try {
+    const response = await fetch(URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedParticipation),
+    });
+
+    if (response.ok) {
+      alert("Event updated");
+      printEvents();
+    } else {
+      console.error("Error updating event");
+    }
+  } catch (error) {
+    console.error("Error updating event:", error);
+  }
+}
+
+async function getEventById(eventId) {
+  const URL = `http://localhost:8080/api/v1/events/${eventId}`;
+  try {
+    const response = await fetch(URL);
+
+    if (!response.ok) {
+      throw new Error(
+        `Error fetching event with ID ${eventId}: ${response.statusText}`
+      );
+    }
+
+    const eventData = await response.json();
+    return eventData;
+  } catch (error) {
+    console.error("Error fetching event:", error);
+  }
+}
+
+async function getPartById(partId) {
+  const URL = `http://localhost:8080/api/v1/eventParticipation/${partId}`;
+  try {
+    const response = await fetch(URL);
+
+    if (!response.ok) {
+      throw new Error(
+        `Error fetching event with ID ${partId}: ${response.statusText}`
+      );
+    }
+
+    const eventData = await response.json();
+    return eventData;
+  } catch (error) {
+    console.error("Error fetching event:", error);
+  }
+}
+
+async function printFormEvent(id) {
+  const modalElement = document.getElementById("modalEvent");
+  const modalInstance = new bootstrap.Modal(modalElement);
+  modalInstance.show();
+  const data = await getEventById(id);
+  console.log(data);
+  dateFormat = new Date(data.date).toISOString().split("T")[0];
+  document.getElementById("eventId").value = data.id;
+  document.getElementById("nameEvent").value = data.name;
+  document.getElementById("placeEvent").value = data.place;
+  document.getElementById("dateEvent").value = dateFormat;
+  document.getElementById("capacityEvent").value = data.capacity;
+  document.getElementById("descriptionEvent").value = data.description;
+  document.getElementById("eventType").value = data.eventType;
+  document.getElementById("statusEvent").value = data.status;
+}
+
+async function printFormParticipation(id) {
+  const modalElement = document.getElementById("modalEventParticipation");
+  const modalInstance = new bootstrap.Modal(modalElement);
+  modalInstance.show();
+  const data = await getPartById(id);
+  console.log(data);
+  document.getElementById("roleParticipant").value = data.participantRole;
+  // document.getElementById("eventParticipation").value = ;
+  // document.getElementById("userParticipation").value = ;
+  document.getElementById("partId").value = data.id;
 }
