@@ -149,62 +149,77 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="name"
+                  id="nameEvent"
                   placeholder="Name"
-                  name="name"
+                  name="nameEvent"
                 />
-                <label for="name" class="form-label">Name</label>
+                <label for="nameEvent" class="form-label">Name</label>
               </div>
               <div class="form-floating mb-3">
                 <input
                   type="text"
                   class="form-control"
-                  id="place"
+                  id="placeEvent"
                   placeholder="Place"
-                  name="place"
+                  name="nameEvent"
                 />
-                <label for="place" class="form-label">Place</label>
+                <label for="placeEvent" class="form-label">Place</label>
               </div>
               <div class="form-floating mb-3">
                 <input
                   type="date"
                   class="form-control"
-                  id="date"
+                  id="dateEvent"
                   placeholder="Date"
-                  name="date"
+                  name="dateEvent"
                 />
-                <label for="date" class="form-label">Date </label>
+                <label for="dateEvent" class="form-label">Date </label>
               </div>
               <div class="form-floating mb-3">
                 <input
                   type="text"
                   class="form-control"
-                  id="capacity"
+                  id="capacityEvent"
                   placeholder="Capacity"
-                  name="capacity"
+                  name="capacityEvent"
                 />
-                <label for="capacity" class="form-label">Capacity</label>
+                <label for="capacityEvent" class="form-label">Capacity</label>
               </div>
               <div class="form-floating mb-3">
                 <input
                   type="text"
                   class="form-control"
-                  id="description"
+                  id="descriptionEvent"
                   placeholder="Description"
-                  name="description"
+                  name="descriptionEvent"
                 />
-                <label for="description" class="form-label">Description</label>
+                <label for="descriptionEvent" class="form-label">Description</label>
               </div>
               <div class="form-floating mb-3">
                 <select
                   class="form-select"
-                  id="floatingSelect"
+                  id="eventType"
                   aria-label="Floating label select example"
                   name="type"
                 >
                   <option selected>Event Type</option>
                   <option value="CONFERENCE">Conference</option>
                   <option value="FESTIVAL">Festival</option>
+                </select>
+              </div>
+              <div class="form-floating mb-3">
+                <select
+                  class="form-select"
+                  id="statusEvent"
+                  aria-label="Floating label select example"
+                  name="type"
+                >
+                  <option selected>Status</option>
+                  <option value="ACTIVE">Active</option>
+                  <option value="INACTIVE">Inactive</option>
+                  <option value="COMPLETED">Completed</option>
+                  <option value="CANCELLED">Cancelled</option>
+                  <option value="POSTPONED">Postponed</option>
                 </select>
               </div>
             </form>
@@ -217,7 +232,7 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" id="saveEvent">Save changes</button>
           </div>
         </div>
       </div>
@@ -235,7 +250,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Add event</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add participation</h1>
             <button
               type="button"
               class="btn-close"
@@ -250,7 +265,7 @@
               <div class="form-floating mb-3">
                 <select
                   class="form-select"
-                  id="floatingSelect"
+                  id="roleParticipant"
                   aria-label="Floating label select example"
                   name="type"
                 >
@@ -263,7 +278,7 @@
               <div class="form-floating mb-3">
                 <select
                   class="form-select"
-                  id="floatingSelect"
+                  id="eventParticipation"
                   aria-label="Floating label select example"
                   name="type"
                 >
@@ -275,7 +290,7 @@
               <div class="form-floating mb-3">
                 <select
                   class="form-select"
-                  id="floatingSelect"
+                  id="userParticipation"
                   aria-label="Floating label select example"
                   name="type"
                 >
@@ -294,7 +309,7 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" id="saveParticipation">Save changes</button>
           </div>
         </div>
       </div>

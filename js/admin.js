@@ -2,30 +2,55 @@ const tables = document.querySelector("#tables");
 const eventsButtton = document.querySelector("#events-buttton");
 const participationsButtton = document.querySelector("#participations-buttton");
 const usersButtton = document.querySelector("#users-buttton");
+const createEventButton = document.querySelector("#saveEvent");
+const createPartButton = document.querySelector("#saveParticipation");
 
 document.addEventListener("DOMContentLoaded", () => {
-    consumirAPIEvents();
-  });
+  printEvents();
+});
 
 eventsButtton.addEventListener("click", () => {
-  consumirAPIEvents();
+  printEvents();
 });
 
 participationsButtton.addEventListener("click", () => {
-    consumirAPIParticipations();
-  });
+  printParticipations();
+});
+
+createEventButton.addEventListener("click", () => {
+  createEvent();
+});
+
+createPartButton.addEventListener("click", () => {
+  createParticipation();
+});
 
 async function consumirAPIEvents() {
   const URL = "http://localhost:8080/api/v1/events";
   const response = await fetch(URL);
   const data = await response.json();
-
-  printEvents(data);
+return data;
+  
 }
 
-function printEvents(data) {
+async function consumirAPIParticipations() {
+  const URL = "http://localhost:8080/api/v1/eventParticipation";
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+}
+
+async function consumirAPIUsers() {
+  const URL = "http://localhost:8080/api/v1/users";
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+}
+
+async function printEvents() {
+  const data = await consumirAPIEvents();
   console.log(data);
-  cleanHTML();
+  cleanHTML(tables);
   tables.innerHTML += `<div>
     <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEvent"> Create a new event </button>
   </div>
@@ -82,18 +107,14 @@ function printEvents(data) {
   });
 }
 
-async function consumirAPIParticipations() {
-    const URL = "http://localhost:8080/api/v1/eventParticipation";
-    const response = await fetch(URL);
-    const data = await response.json();
-    printParticipations(data);
-  }
-  
-  function printParticipations(data) {
-    console.log(data);
-    cleanHTML();
-    tables.innerHTML += `<div>
-      <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEventParticipation"> Create a new participation </button>
+
+
+async function printParticipations() {
+  const data = await consumirAPIParticipations();
+  console.log(data);
+  cleanHTML(tables);
+  tables.innerHTML += `<div>
+      <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEventParticipation" id="modalPartButton"> Create a new participation </button>
     </div>
   
     <table class="table table-striped table-hover table-dark">
@@ -112,16 +133,22 @@ async function consumirAPIParticipations() {
       </thead>
       <tbody></tbody>
       </table>`;
-    data["content"].forEach((eventPart) => {
-      const fecha = new Date(eventPart.simpleEventResponse.date);
   
-      const año = fecha.getFullYear();
-      const mes = ("0" + (fecha.getMonth() + 1)).slice(-2);
-      const día = ("0" + fecha.getDate()).slice(-2);
+  tables.querySelector("#modalPartButton").addEventListener("click",()=>{
+    printEventInSelect();
+    printusersInSelect();
+  });
   
-      eventPart.simpleEventResponse.date = `${año}-${mes}-${día}`;
-  
-      tables.querySelector("tbody").innerHTML += `
+  data["content"].forEach((eventPart) => {
+    const fecha = new Date(eventPart.simpleEventResponse.date);
+
+    const año = fecha.getFullYear();
+    const mes = ("0" + (fecha.getMonth() + 1)).slice(-2);
+    const día = ("0" + fecha.getDate()).slice(-2);
+
+    eventPart.simpleEventResponse.date = `${año}-${mes}-${día}`;
+
+    tables.querySelector("tbody").innerHTML += `
           
               <tr>
                 <td scope="row">${eventPart.id}</td>
@@ -145,11 +172,111 @@ async function consumirAPIParticipations() {
               </tr>
             
           `;
-    });
-  }
+  });
+}
 
-function cleanHTML() {
-  while (tables.firstChild) {
-    tables.removeChild(tables.firstChild);
+function cleanHTML(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
   }
+}
+
+async function createEvent() {
+  const name = document.getElementById("nameEvent").value;
+  const place = document.getElementById("placeEvent").value;
+  const dateInput = document.getElementById("dateEvent").value;
+  const capacity = document.getElementById("capacityEvent").value;
+  const description = document.getElementById("descriptionEvent").value;
+  const eventType = document.getElementById("eventType").value;
+  const status = document.getElementById("statusEvent").value;
+
+  const date = new Date(dateInput).toISOString();
+
+  const event = {
+    name,
+    place,
+    date,
+    capacity,
+    description,
+    eventType,
+    status
+  };
+
+  try {
+    const response = await fetch("http://localhost:8080/api/v1/events", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(event),
+    });
+    console.log(response);
+
+    if (response.ok) {
+      console.log("Event added");
+    } else {
+      console.error("Error adding event");
+    }
+  } catch (error) {
+    console.error("Error adding event:", error);
+  }
+}
+
+async function createParticipation() {
+  const participantRole = document.getElementById("roleParticipant").value;
+  const eventId = document.getElementById("eventParticipation").value;
+  const userId = document.getElementById("userParticipation").value;
+
+  const participation = {
+    participantRole, userId, eventId
+  };
+
+  try {
+    const response = await fetch("http://localhost:8080/api/v1/eventParticipation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(participation),
+    });
+    console.log(response);
+
+    if (response.ok) {
+      console.log("participation added");
+    } else {
+      console.error("Error adding participation");
+    }
+  } catch (error) {
+    console.error("Error adding participation:", error);
+  }
+}
+
+async function printEventInSelect() {
+  const selectEvent = document.querySelector("#eventParticipation");
+  cleanHTML(selectEvent);
+  selectEvent.innerHTML += `
+    <option selected>Select Event</option>
+  `;
+  const data = await consumirAPIEvents();
+  data["content"].forEach((event) => {
+    selectEvent.innerHTML += `
+    <option value="${event.id}">${event.name}</option>
+          `;
+  });
+
+}
+
+async function printusersInSelect() {
+  const selectUser = document.querySelector("#userParticipation");
+  cleanHTML(selectUser);
+  selectUser.innerHTML += `
+    <option selected>Select User</option>
+  `;
+  const data = await consumirAPIUsers();
+  data["content"].forEach((user) => {
+    selectUser.innerHTML += `
+    <option value="${user.id}">${user.username}</option>
+          `;
+  });
+
 }
