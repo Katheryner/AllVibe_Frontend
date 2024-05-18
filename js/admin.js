@@ -27,7 +27,7 @@ function printEvents(data) {
   console.log(data);
   cleanHTML();
   tables.innerHTML += `<div>
-    <a class="btn btn-success mb-3"> Create a new event </a>
+    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEvent"> Create a new event </button>
   </div>
 
   <table class="table table-striped table-hover table-dark">
@@ -93,7 +93,7 @@ async function consumirAPIParticipations() {
     console.log(data);
     cleanHTML();
     tables.innerHTML += `<div>
-      <a class="btn btn-success mb-3"> Create a new participation </a>
+      <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEventParticipation"> Create a new participation </button>
     </div>
   
     <table class="table table-striped table-hover table-dark">
