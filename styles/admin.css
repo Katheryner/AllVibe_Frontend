@@ -1,0 +1,28 @@
+*{
+  box-sizing: border-box;
+  font-family: "Roboto Condensed", sans-serif;   
+}
+
+body{
+  background: #222;
+}
+
+th{
+  background: #e66944 !important;
+}
+
+header{
+  font-weight: bold;
+  color: #fff;
+  
+}
+
+.logo img {
+  height: 15vh;
+}
+
+.nav-link:hover{
+  color: #FC9779 !important;
+}
+
+
