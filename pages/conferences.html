@@ -12,7 +12,7 @@
   <title>Conferences</title>
 </head>
 
-<body class="vh-100">
+<body id="body" class="vh-100">
   <header>
     <nav class="navbar navbar-expand-lg bg-black">
       <div class="container-fluid p-3 justify-content-around">
@@ -56,38 +56,37 @@
       <div class="form-containerM sign-up-containerM">
         <form action="#" id="SignUpForm">
           <a href="#" id="logC">x</a>
-          <h1>Create Account</h1>
-          <span>or use your email for registration</span>
+          <h2 data-lang="create-account" >Create Account</h2>
+          <span data-lang="infoLog">or use your email for registration</span>
           <input type="text" placeholder="Name" id="username"/>
           <input type="email" placeholder="Email" id="emailRegister" />
           <input type="password" placeholder="Password" id="passwordRegister" />
-          <button>Sign Up</button>
+          <button data-lang="button-signUp">Sign Up</button>
         </form>
       </div>
       <div class="form-containerM sign-in-containerM">
         <form action="#" id="LoginForm">
           <a href="#" id="logCd">x</a>
-          <h1>Sign in</h1>
-          <span>or use your account</span>
+          <h2 data-lang="signIn">Sign in</h2>
+          <span data-lang="infoLog2" >or use your account</span>
           <input type="email" placeholder="Email" id="emailLogin"/>
           <input type="password" placeholder="Password" id="passwordLogin"/>
-          <a href="#">Forgot your password?</a>
-          <button>Sign In</button>
+          <button data-lang="button-signIn">Sign In</button>
         </form>
       </div>
       <div class="overlay-containerM">
         <div class="overlayM">
           <div class="overlay-panelM overlay-leftM">
-            <h1>Welcome Back!</h1>
-            <p>
+            <h2 data-lang="welcome">Welcome Back!</h2>
+              <p data-lang="infolog3">
               To keep connected with us please login with your personal info
             </p>
-            <button class="ghostM" id="signIn">Sign In</button>
+            <button data-lang="signIn" class="ghostM" id="signIn">Sign In</button>
           </div>
           <div class="overlay-panelM overlay-rightM">
-            <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start journey with us</p>
-            <button class="ghostM" id="signUp">Sign Up</button>
+            <h2 data-lang="hello">Hello, Friend!</h2>
+            <p data-lang="infolog4">Enter your personal details and start journey with us</p>
+            <button data-lang="create-account" class="ghostM" id="signUp">Sign Up</button>
           </div>
         </div>
       </div>
@@ -100,7 +99,7 @@
       <div id="title1">
         <div id="title-main">
           <span>
-            <h1>CONFERENCES</h1>
+            <h1 data-lang="titlePC" >CONFERENCES</h1>
           </span>
         </div>
         <div id="fondo-title1"></div>
@@ -323,48 +322,59 @@
   </div>
 
   <div class="newsLetter bg-black">
-    <div class="container">
-      <h1 class="pt-5 titleNewletter text-light">MANTENME AL DIA</h1>
-      <div class="container d-flex p-5 bg-newsletter h-50 gap-5">
-        <div class="w-50">
-          <p>
-            Con los últimos conciertos y eventos. Regístrate para recibir el
-            boletín informativo.
-          </p>
-        </div>
-        <form class="d-flex justify-content-center w-75 h-25 align-items-center gap-5">
-          <div class="w-75 d-flex justify-content-center align-items-center">
-            <input type="email" class="form-control border border-dark border-3" id="email-newsLetter"
-              aria-describedby="emailHelp" placeholder=" Ingresa tu email" />
+      <div class="container">
+        <h1 data-lang="notice" class="pt-5 titleNewletter text-light">MANTENME AL DIA</h1>
+        <div class="container d-flex p-5 bg-newsletter h-50 gap-5">
+          <div class="w-50">
+            <p data-lang="info2">
+              Con los últimos conciertos y eventos. Regístrate para recibir el
+              boletín informativo.
+            </p>
           </div>
-          <button type="submit" class="subscribe border border-dark border-3 h-100 px-5 py-1">
-            Subscribe
-          </button>
-        </form>
+          <form
+            class="d-flex justify-content-center w-75 h-25 align-items-center gap-5"
+          >
+            <div class="w-75 d-flex justify-content-center align-items-center">
+              <input
+                type="email"
+                class="form-control border border-dark border-3"
+                id="email-newsLetter"
+                aria-describedby="emailHelp"
+                placeholder="@email"
+              />
+            </div>
+            <button
+            data-lang="Subscribe"
+              type="submit"
+              class="subscribe border border-dark border-3 h-100 px-5 py-1"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
 
   <footer class="py-3 bg-black">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-light">Home</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-light">Festivals</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-light">Conferences</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-light">FAQs</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link px-2 text-light">About</a>
-      </li>
-    </ul>
-    <p class="text-center text-light">© 2024 ALL VIBE, Inc</p>
-  </footer>
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item">
+          <a data-lang="home" href="#" class="nav-link px-2 text-light">Home</a>
+        </li>
+        <li class="nav-item">
+          <a data-lang="festivals" href="#" class="nav-link px-2 text-light">Festivals</a>
+        </li>
+        <li class="nav-item">
+          <a data-lang="conferences" href="#" class="nav-link px-2 text-light">Conferences</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-light">FAQs</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-light">About</a>
+        </li>
+      </ul>
+      <p class="text-center text-light">© 2024 ALL VIBE, Inc</p>
+    </footer>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
