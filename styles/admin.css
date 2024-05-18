@@ -9,6 +9,20 @@ body{
 
 th{
   background: #e66944 !important;
+  color: black !important;
+}
+
+a.btn-management{
+  background: #e66944 !important;
+  color: black !important;
+
+}
+
+a.btn-management:hover{
+  background: #222 !important;
+  color: #e66944 !important;
+  border: 1px solid #e66944;
+  
 }
 
 header{

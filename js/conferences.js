@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
 async function consumirAPI() {
-    const URL = "http://localhost:8080/api/v1/events/filter/FESTIVAL"
+    const URL = "http://localhost:8080/api/v1/events/filter/CONFERENCE"
     const respuesta = await fetch(URL)
     const datos = await respuesta.json()
 
