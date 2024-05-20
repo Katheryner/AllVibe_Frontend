@@ -239,6 +239,45 @@
       </div>
     </div>
 
+    <!--Modal Users-->
+    <!-- Agrega este bloque de código dentro del cuerpo de tu página HTML, en la sección donde deseas mostrar la tabla de usuarios -->
+
+<!-- Modal de edición de usuario -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Formulario de edición de usuario -->
+              <form id="editUserForm">
+                  <input type="hidden" id="editUserId">
+                  <div class="mb-3">
+                      <label for="editUsername" class="form-label">Nombre de Usuario</label>
+                      <input type="text" class="form-control" id="editUsername">
+                  </div>
+                  <div class="mb-3">
+                      <label for="editEmail" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="editEmail">
+                  </div>
+                  <div class="mb-3">
+                      <label for="editRole" class="form-label">Rol</label>
+                      <input type="text" class="form-control" id="editRole">
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id="saveChangesBtn">Guardar Cambios</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
     <!-- Modal participation -->
 
     <div
@@ -323,5 +362,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="/js/admin.js"></script>
+    <script src="/js/users.js"></script>
   </body>
 </html>

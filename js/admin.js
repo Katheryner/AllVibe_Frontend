@@ -26,6 +26,9 @@ createPartButton.addEventListener("click", () => {
   saveParticipation();
 });
 
+usersButtton.addEventListener('click', () => {
+  printUsers(); } )
+
 //functions
 
 //FetchAPIs
@@ -62,7 +65,131 @@ async function consumirAPIUsers() {
   }
 }
 
-//prints
+
+async function consumeAPIUsersNestJS() {
+  try {
+    const URL = "http://localhost:8080/api/v1/users";
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+//prints users 
+async function printUsers() {
+  const data = await consumeAPIUsersNestJS();
+  console.log(data);
+
+  // Limpia la tabla de usuarios antes de imprimir los nuevos usuarios
+  cleanHTML(tables);
+
+  // Crea una nueva tabla para los usuarios
+  tables.innerHTML += `
+      <div>
+          <h2>Users</h2>
+      </div>
+      <table class="table table-striped table-hover table-dark">
+          <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+              </tr>
+          </thead>
+          <tbody></tbody>
+      </table>`;
+
+  // Itera sobre los usuarios y agrega filas a la tabla
+  data.forEach((user) => {
+      tables.querySelector("tbody").innerHTML += `
+          <tr>
+              <td>${user.userId}</td>
+              <td>${user.username}</td>
+              <td>${user.email}</td>
+              <td>${user.role}</td>
+          </tr>`;
+  });
+}
+document.querySelectorAll(".edit-user-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+      const userId = button.dataset.userId;
+      printEditUserForm(userId);
+  });
+});
+
+async function printEditUserForm(userId) {
+// Obtener los datos del usuario por su ID
+const userData = await getUserById(userId);
+
+// Rellenar el formulario de edición de usuario con los datos del usuario
+document.getElementById("editUserId").value = userData.userId;
+document.getElementById("editUsername").value = userData.username;
+document.getElementById("editEmail").value = userData.email;
+document.getElementById("editRole").value = userData.role;
+
+// Mostrar el modal de edición de usuario
+const modalElement = document.getElementById("editUserModal");
+const modalInstance = new bootstrap.Modal(modalElement);
+modalInstance.show();
+}
+
+// Selecciona el botón de "Guardar cambios" en el modal de edición
+const saveChangesBtn = document.getElementById("saveChangesBtn");
+
+// Añade un event listener al botón de "Guardar cambios"
+saveChangesBtn.addEventListener("click", async () => {
+    // Obtén los nuevos detalles del usuario del formulario de edición
+    const userId = document.getElementById("editUserId").value;
+    const newUsername = document.getElementById("editUsername").value;
+    const newEmail = document.getElementById("editEmail").value;
+    const newRole = document.getElementById("editRole").value;
+
+    // Crea un objeto con los nuevos detalles del usuario
+    const updatedUser = {
+        username: newUsername,
+        email: newEmail,
+        role: newRole
+    };
+
+    // Envía una solicitud PUT al servidor para actualizar el usuario
+    await updateUser(userId, updatedUser);
+
+    // Cierra el modal de edición
+    const editUserModal = new bootstrap.Modal(document.getElementById("editUserModal"));
+    editUserModal.hide();
+
+    // Vuelve a imprimir la tabla de usuarios para reflejar los cambios
+    printUsers();
+});
+
+// Función para enviar una solicitud PUT al servidor para actualizar el usuario
+async function updateUser(userId, updatedUserDetails) {
+    const URL = `http://localhost:8080/api/v1/users/${userId}`;
+    try {
+        const response = await fetch(URL, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedUserDetails)
+        });
+
+        if (response.ok) {
+            console.log("Usuario actualizado exitosamente");
+        } else {
+            console.error("Error al actualizar el usuario");
+        }
+    } catch (error) {
+        console.error("Error al actualizar el usuario:", error);
+    }
+}
+
+
+
+
+//prints events
 
 async function printEvents() {
   const data = await consumirAPIEvents();
