@@ -3,6 +3,8 @@ const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
 
 const logoutBtn = document.getElementById("logout");
+const loginButton = document.getElementById("logInButton");
+
 
 signUpButton.addEventListener("click", () => {
   container.classList.add("right-panel-activeM");
@@ -13,12 +15,12 @@ signInButton.addEventListener("click", () => {
 });
 
 const modal = document.getElementById("modalContent");
+const body = document.getElementById("body");
 const logR = document.getElementById("logR");
 const logClosed = document.getElementById("logC");
 const logC = document.getElementById("logCd");
 
 logR.addEventListener("click", (e) => {
-  console.log("object");
   e.preventDefault();
 
   if (
@@ -28,20 +30,23 @@ logR.addEventListener("click", (e) => {
     modal.classList.remove("initial_disabled");
     modal.classList.add("disebled_");
     modal.classList.add("action_look");
+    body.classList.add("noScroll");
   }
 });
 logClosed.addEventListener("click", (e) => {
-  console.log("object");
+  
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
+    body.classList.remove("noScroll");
     modal.classList.add("initial_disabled");
     modal.classList.remove("action_look");
   }
 });
 logC.addEventListener("click", (e) => {
-  console.log("object");
+  
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
+    body.classList.remove("noScroll");
     modal.classList.add("initial_disabled");
     modal.classList.remove("action_look");
   }
@@ -75,10 +80,10 @@ async function handleSubmit(e) {
       
     });
     console.log(response);
-   
+
     if (response.ok) {
       console.log('Registro exitoso');
-     
+    await saveUser(formData);
 
     } else {
       console.error('Error en el registro uno');
@@ -114,9 +119,13 @@ async function handleLogin(e) {
     });
 
     if (response.ok) {
+      
       console.log('Inicio de sesión exitoso');
       // Redireccionar a la página de inicio después del inicio de sesión exitoso
-      //window.location.href = 'https://cloud.mongodb.com/v2/66307a9e5d04d15827e370f1#/overview';
+      window.location.href = '../index.html';
+      //loginButton.style.display = "none";
+      //logoutBtn.style.display = "block";
+
       const token = await response.json()
       console.log(token);
       localStorage.setItem('token', JSON.stringify(token))
@@ -127,20 +136,53 @@ async function handleLogin(e) {
     console.error('Error en el inicio de sesión:', error);
   }
 
-  logoutBtn.addEventListener('click', handleLogout);
+  
+}
+logoutBtn.addEventListener('click', handleLogout);
 
   function handleLogout() {
 
     localStorage.removeItem('token');
-    window.location.href = '';
+    window.location.href = '../index.html';
     console.log('Sesión cerrada');
     
+    //logoutBtn.style.display = "none";
+    //loginButton.style.display = "block";
   }
+
+async function saveUser(user) {
+  user.role = "USER";
+  try {
+    const response = await fetch('http://localhost:8080/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+      
+    });
+  
+    if (response.ok) {
+      console.log('success User');
+
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+
+  
 }
 
 
+//Prueba
+const token = localStorage.getItem('token')
 
-
-
+if(token){
+  loginButton.style.display = "none";
+  logoutBtn.style.display = "block";
+}else{
+  loginButton.style.display = "block";
+  logoutBtn.style.display = "none";
+}
 
 

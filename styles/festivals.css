@@ -125,7 +125,7 @@ h1 {
 }
 
 .card-image {
-    height: 50%;
+    height: 100%;
     width: 100%;
 }
 
@@ -161,4 +161,8 @@ h1 {
 .card:hover .card-description {
     display: block;
     text-align: justify;
+}
+
+.logout{
+    display: none;
 }

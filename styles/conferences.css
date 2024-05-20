@@ -125,7 +125,7 @@ h1 {
   }
 
   .card-image {
-    height: 50%;
+    height: 100%;
     width: 100%;
   }
   
@@ -161,3 +161,7 @@ h1 {
     display: block;
     text-align: justify;
   }
+
+  .logout{
+    display: none;
+}
