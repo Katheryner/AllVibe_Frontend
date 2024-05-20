@@ -6,6 +6,7 @@ const logoutBtn = document.getElementById("logout");
 const loginButton = document.getElementById("logInButton");
 
 
+
 signUpButton.addEventListener("click", () => {
   container.classList.add("right-panel-activeM");
 });
@@ -35,6 +36,7 @@ logR.addEventListener("click", (e) => {
 });
 logClosed.addEventListener("click", (e) => {
   
+  
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
     body.classList.remove("noScroll");
@@ -43,6 +45,7 @@ logClosed.addEventListener("click", (e) => {
   }
 });
 logC.addEventListener("click", (e) => {
+  
   
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
@@ -80,6 +83,7 @@ async function handleSubmit(e) {
       
     });
     console.log(response);
+
 
     if (response.ok) {
       console.log('Registro exitoso');
@@ -144,6 +148,7 @@ logoutBtn.addEventListener('click', handleLogout);
 
     localStorage.removeItem('token');
     window.location.href = '../index.html';
+
     console.log('Sesión cerrada');
     
     //logoutBtn.style.display = "none";
