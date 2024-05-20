@@ -12,7 +12,7 @@ signInButton.addEventListener("click", () => {
   container.classList.remove("right-panel-activeM");
 });
 
-const modal = document.getElementById("modalContent");
+const modal = document.getElementById("modalContentM");
 const body = document.getElementById("body");
 const logR = document.getElementById("logR");
 const logClosed = document.getElementById("logC");
