@@ -68,7 +68,7 @@ async function consumirAPIUsers() {
 
 async function consumeAPIUsersNestJS() {
   try {
-    const URL = "http://localhost:8080/api/v1/users";
+    const URL = "http://localhost:3000/user";
     const response = await fetch(URL);
     const data = await response.json();
     return data;
