@@ -111,35 +111,48 @@ async function printUsers() {
               <td>${user.username}</td>
               <td>${user.email}</td>
               <td>${user.role}</td>
-              <td><a class="btn btn-primary edit-user-btn" data-id=${user._id}">
-                <i class="bx bxs-edit-alt"></i>
-              </a>
+              <td>
+              <button type="button" class="btn btn-primary edit-user-btn" data-bs-toggle="modal" data-bs-target="#
+              cn" data-id="${user._id}">
+                Edit
+              </button>
               </td>
           </tr>`;
+          
   });
-}
-document.querySelectorAll(".edit-user-btn").forEach((button) => {
-  console.log("working");
-  button.addEventListener("click", () => {
-      const userId = button.dataset._id;
+  tables.querySelectorAll(".edit-user-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      
+      const userId = button.getAttribute("data-id");
+      console.log(userId); 
+      fetch("http://localhost:3000/user/"+ userId).then(e => e.json()).then(d => {
+        document.getElementById("editEmail").value = d.data.email;
+        document.getElementById("editUsername").value = d.data.username;
+        document.getElementById("editRole").value = d.data.role;
+        console.log(data);
+      })
       printEditUserForm(userId);
+    });
   });
-});
+
+  // Añade el evento 'click' a los botones de edición después de actualizar la tabla
+
+}
 
 async function printEditUserForm(userId) {
-// Obtener los datos del usuario por su ID
-const userData = await getUserById(userId);
+  // Obtener los datos del usuario por su ID
+  // const userData = await getUserById(userId);
 
-// Rellenar el formulario de edición de usuario con los datos del usuario
-document.getElementById("editUserId").value = userData.userId;
-document.getElementById("editUsername").value = userData.username;
-document.getElementById("editEmail").value = userData.email;
-document.getElementById("editRole").value = userData.role;
+  // Rellenar el formulario de edición de usuario con los datos del usuario
+  document.getElementById("editUserId").value = userId._id;
+  document.getElementById("editUsername").value = userId.username;
+  document.getElementById("editEmail").value = userId.email;
+  document.getElementById("editRole").value = userId.role;
 
-// Mostrar el modal de edición de usuario
-const modalElement = document.getElementById("editUserModal");
-const modalInstance = new bootstrap.Modal(modalElement);
-modalInstance.show();
+  // Mostrar el modal de edición de usuario
+  const modalElement = document.getElementById("editUserModal");
+  const modalInstance = new bootstrap.Modal(modalElement);
+  modalInstance.show();
 }
 
 // Selecciona el botón de "Guardar cambios" en el modal de edición
@@ -147,53 +160,52 @@ const saveChangesBtn = document.getElementById("saveChangesBtn");
 
 // Añade un event listener al botón de "Guardar cambios"
 saveChangesBtn.addEventListener("click", async () => {
-    // Obtén los nuevos detalles del usuario del formulario de edición
-    const userId = document.getElementById("editUserId").value;
-    const newUsername = document.getElementById("editUsername").value;
-    const newEmail = document.getElementById("editEmail").value;
-    const newRole = document.getElementById("editRole").value;
+  // Obtén los nuevos detalles del usuario del formulario de edición
+  const userId = document.getElementById("editUserId").value;
+  const newUsername = document.getElementById("editUsername").value;
+  const newEmail = document.getElementById("editEmail").value;
+  const newRole = document.getElementById("editRole").value;
 
-    // Crea un objeto con los nuevos detalles del usuario
-    const updatedUser = {
-        username: newUsername,
-        email: newEmail,
-        role: newRole
-    };
+  // Crea un objeto con los nuevos detalles del usuario
+  const updatedUser = {
+    username: newUsername,
+    email: newEmail,
+    role: newRole
+  };
 
-    // Envía una solicitud PUT al servidor para actualizar el usuario
-    await updateUser(userId, updatedUser);
+  // Envía una solicitud PUT al servidor para actualizar el usuario
+  await updateUser(userId, updatedUser);
 
-    // Cierra el modal de edición
-    const editUserModal = new bootstrap.Modal(document.getElementById("editUserModal"));
-    editUserModal.hide();
+  // Cierra el modal de edición
+  const modalElement = document.getElementById("editUserModal");
+  const modalInstance = bootstrap.Modal.getInstance(modalElement);
+  modalInstance.hide();
 
-    // Vuelve a imprimir la tabla de usuarios para reflejar los cambios
-    printUsers();
+  // Vuelve a imprimir la tabla de usuarios para reflejar los cambios
+  printUsers();
 });
 
 // Función para enviar una solicitud PUT al servidor para actualizar el usuario
 async function updateUser(userId, updatedUserDetails) {
-    const URL = `http://localhost:8080/api/v1/users/${userId}`;
-    try {
-        const response = await fetch(URL, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(updatedUserDetails)
-        });
+  const URL = `ttp://localhost:3000/user/${user._id}`;
+  try {
+    const response = await fetch(URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedUserDetails)
+    });
 
-        if (response.ok) {
-            console.log("Usuario actualizado exitosamente");
-        } else {
-            console.error("Error al actualizar el usuario");
-        }
-    } catch (error) {
-        console.error("Error al actualizar el usuario:", error);
+    if (response.ok) {
+      console.log("Usuario actualizado exitosamente");
+    } else {
+      console.error("Error al actualizar el usuario");
     }
+  } catch (error) {
+    console.error("Error al actualizar el usuario:", error);
+  }
 }
-
-
 
 
 //prints events
