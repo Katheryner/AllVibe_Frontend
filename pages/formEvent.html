@@ -11,41 +11,40 @@
 <body class="vh-100 bg-black d-flex flex-column justify-content-center align-items-center">
   <header >
     <a href="/index.html"><img class="logo" src="/img/logoAmo.png" alt="logo"></a>
-    
   </header>
     <form class="form d-flex justify-content-center flex-column align-items-center h-75 w-50" action="https://formspree.io/f/moqgboag"
     method="POST">
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="name" placeholder="Name" name="name">
-            <label for="name" class="form-label">Name</label>
+            <label data-lang="inputName" for="name" class="form-label">Na</label>
           </div>
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="place" placeholder="Place" name="place">
-            <label for="place" class="form-label">Place</label>
+            <label data-lang="inputPlace" for="place" class="form-label">Place</label>
 
         </div>
         <div class="form-floating mb-3">
             <input type="date" class="form-control" id="date" placeholder="Date" name="date">
-            <label for="date" class="form-label">Date </label>
+            <label data-lang="inputDate" for="date" class="form-label">Date </label>
           </div>
           <div class="form-floating mb-3">
               <input type="text" class="form-control" id="capacity" placeholder="Capacity" name="capacity">
-              <label for="capacity" class="form-label">Capacity</label>
+              <label data-lang="inputCapacity" for="capacity" class="form-label">Capacity</label>
   
           </div>
           <div class="form-floating mb-3">
               <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-              <label for="description" class="form-label">Description</label>
+              <label data-lang="inputDescription" for="description" class="form-label">Description</label>
 
           </div>
           <div class="form-floating mb-3">
             <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="type">
-                <option selected>Event Type</option>
-                <option value="CONFERENCE">Conference</option>
-                <option value="FESTIVAL">Festival</option>
+                <option data-lang="inputSelect" selected>--</option>
+                <option data-lang="inputConference" value="CONFERENCE">Conference</option>
+                <option data-lang="inputFestival" value="FESTIVAL">Festival</option>
                 
               </select>
-                <label for="floatingSelect">Event Type</label>
+                <label data-lang="inputEventType" for="floatingSelect">Event Type</label>
           </div>
         <button type="submit" class="btn btn-primary">SEND</button>
       </form>
