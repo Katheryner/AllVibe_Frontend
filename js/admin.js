@@ -71,7 +71,7 @@ async function consumeAPIUsersNestJS() {
     const URL = "http://localhost:3000/user";
     const response = await fetch(URL);
     const data = await response.json();
-    return data;
+    return data["data"]
   } catch (error) {
     console.error("Error:", error);
   }
@@ -96,6 +96,8 @@ async function printUsers() {
                   <th scope="col">ID</th>
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Actions</th>
               </tr>
           </thead>
           <tbody></tbody>
@@ -105,16 +107,21 @@ async function printUsers() {
   data.forEach((user) => {
       tables.querySelector("tbody").innerHTML += `
           <tr>
-              <td>${user.userId}</td>
+              <td>${user._id}</td>
               <td>${user.username}</td>
               <td>${user.email}</td>
               <td>${user.role}</td>
+              <td><a class="btn btn-primary edit-user-btn" data-id=${user._id}">
+                <i class="bx bxs-edit-alt"></i>
+              </a>
+              </td>
           </tr>`;
   });
 }
 document.querySelectorAll(".edit-user-btn").forEach((button) => {
+  console.log("working");
   button.addEventListener("click", () => {
-      const userId = button.dataset.userId;
+      const userId = button.dataset._id;
       printEditUserForm(userId);
   });
 });
