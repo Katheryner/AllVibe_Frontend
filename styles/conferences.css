@@ -161,3 +161,7 @@ h1 {
     display: block;
     text-align: justify;
   }
+
+  .logout{
+    display: none;
+}

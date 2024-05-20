@@ -3,6 +3,7 @@ const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
 
 const logoutBtn = document.getElementById("logout");
+const loginButton = document.getElementById("logInButton");
 
 
 signUpButton.addEventListener("click", () => {
@@ -79,10 +80,10 @@ async function handleSubmit(e) {
       
     });
     console.log(response);
-   
+
     if (response.ok) {
       console.log('Registro exitoso');
-     await saveUser(formData);
+    await saveUser(formData);
 
     } else {
       console.error('Error en el registro uno');
@@ -120,7 +121,11 @@ async function handleLogin(e) {
     if (response.ok) {
       console.log('Inicio de sesión exitoso');
       // Redireccionar a la página de inicio después del inicio de sesión exitoso
-      //window.location.href = 'https://cloud.mongodb.com/v2/66307a9e5d04d15827e370f1#/overview';
+      
+      loginButton.style.display = "none";
+      logoutBtn.style.display = "block";
+      window.location.href = '../index.html';
+
       const token = await response.json()
       console.log(token);
       localStorage.setItem('token', JSON.stringify(token))
@@ -136,9 +141,11 @@ async function handleLogin(e) {
   function handleLogout() {
 
     localStorage.removeItem('token');
-    window.location.href = '';
+    window.location.href = '../index.html';
     console.log('Sesión cerrada');
     
+    logoutBtn.style.display = "none";
+    loginButton.style.display = "block";
   }
 }
 
@@ -154,7 +161,7 @@ async function saveUser(user) {
       body: JSON.stringify(user),
       
     });
-   
+  
     if (response.ok) {
       console.log('success User');
 
@@ -165,7 +172,6 @@ async function saveUser(user) {
 
   
 }
-
 
 
 
