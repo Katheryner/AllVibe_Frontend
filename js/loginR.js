@@ -2,6 +2,8 @@ const signUpButton = document.getElementById("signUp");
 const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
 
+const logoutBtn = document.getElementById("logout");
+
 signUpButton.addEventListener("click", () => {
   container.classList.add("right-panel-activeM");
 });
@@ -123,6 +125,16 @@ async function handleLogin(e) {
     }
   } catch (error) {
     console.error('Error en el inicio de sesión:', error);
+  }
+
+  logoutBtn.addEventListener('click', handleLogout);
+
+  function handleLogout() {
+
+    localStorage.removeItem('token');
+    window.location.href = '';
+    console.log('Sesión cerrada');
+    
   }
 }
 
