@@ -151,7 +151,7 @@ async function printParticipations() {
   console.log(data);
   cleanHTML(tables);
   tables.innerHTML += `<div>
-      <button id="createNewP" data-lang="newParticipation" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEventParticipation" id="modalPartButton"> Create a new participation </button>
+      <button id="createNewP" data-lang="newParticipation" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEventParticipation"> Create a new participation </button>
     </div>
   
     <table class="table table-striped table-hover table-dark">
@@ -177,7 +177,7 @@ async function printParticipations() {
     formCleanParticipation();
   });
 
-  tables.querySelector("#modalPartButton").addEventListener("click", () => {
+  tables.querySelector("#createNewP").addEventListener("click", () => {
     printEventInSelect();
     printUsersInSelect();
   });
