@@ -4,6 +4,7 @@ const container = document.getElementById("container");
 
 const logoutBtn = document.getElementById("logout");
 
+
 signUpButton.addEventListener("click", () => {
   container.classList.add("right-panel-activeM");
 });
@@ -13,12 +14,12 @@ signInButton.addEventListener("click", () => {
 });
 
 const modal = document.getElementById("modalContent");
+const body = document.getElementById("body");
 const logR = document.getElementById("logR");
 const logClosed = document.getElementById("logC");
 const logC = document.getElementById("logCd");
 
 logR.addEventListener("click", (e) => {
-  console.log("object");
   e.preventDefault();
 
   if (
@@ -28,20 +29,23 @@ logR.addEventListener("click", (e) => {
     modal.classList.remove("initial_disabled");
     modal.classList.add("disebled_");
     modal.classList.add("action_look");
+    body.classList.add("noScroll");
   }
 });
 logClosed.addEventListener("click", (e) => {
-  console.log("object");
+  
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
+    body.classList.remove("noScroll");
     modal.classList.add("initial_disabled");
     modal.classList.remove("action_look");
   }
 });
 logC.addEventListener("click", (e) => {
-  console.log("object");
+  
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
+    body.classList.remove("noScroll");
     modal.classList.add("initial_disabled");
     modal.classList.remove("action_look");
   }
@@ -78,7 +82,7 @@ async function handleSubmit(e) {
    
     if (response.ok) {
       console.log('Registro exitoso');
-     
+     await saveUser(formData);
 
     } else {
       console.error('Error en el registro uno');
@@ -138,6 +142,29 @@ async function handleLogin(e) {
   }
 }
 
+
+async function saveUser(user) {
+  user.role = "USER";
+  try {
+    const response = await fetch('http://localhost:8080/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+      
+    });
+   
+    if (response.ok) {
+      console.log('success User');
+
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+
+  
+}
 
 
 

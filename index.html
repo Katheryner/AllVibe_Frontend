@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles/loginRegister/log.css" />
     <title data-lang="title">ALL VIBE</title>
   </head>
-  <body class="vh-100">
+  <body id="body" class="vh-100">
     <header>
       <nav class="navbar navbar-expand-lg bg-black p-0 ">
         <div class="container-fluid justify-content-around">
@@ -98,42 +98,46 @@
         <div class="form-containerM sign-up-containerM">
           <form action="#">
             <a href="#" id="logC">x</a>
-            <h1>Create Account</h1>
-            <span>or use your email for registration</span>
+            <h2 data-lang="create-account" >Create Account</h2>
+            <span data-lang="infoLog">or use your email for registration</span>
             <input type="text" placeholder="Name" id="username" name="username" />
             <input type="email" placeholder="Email" id="emailRegister" name="email" />
             <input type="password" placeholder="Password" id="passwordRegister"name="password" />
-            <button type="submit" id="Sign">Sign Up</button>
+            <button type="submit" id="Sign" data-lang="button-signUp">Sign Up</button>
           </form>
         </div>
         <div class="form-containerM sign-in-containerM">
           <form action="#">
             <a href="#" id="logCd">x</a>
-            <h1>Sign in</h1>
-            <span>or use your account</span>
+            <h2 data-lang="signIn">Sign in</h2>
+            <span data-lang="infoLog2" >or use your account</span>
             <input type="email" placeholder="Email" id="emailLogin" />
             <input type="password" placeholder="Password" id="passwordLogin"/>
             <a href="#">Forgot your password?</a>
-            <button type="submit" id="loginBtn">Sign In</button>
+            <button type="submit" id="loginBtn" data-lang="button-signIn">Sign In</button>
           </form>
         </div>
         <div class="overlay-containerM">
           <div class="overlayM">
             <div class="overlay-panelM overlay-leftM">
-              <h1>Welcome Back!</h1>
-              <p>
+              <h2 data-lang="welcome">Welcome Back!</h2>
+              <p data-lang="infolog3">
                 To keep connected with us please login with your personal info
               </p>
-              <button class="ghostM" id="signIn">Sign In</button>
+              <button data-lang="signIn" class="ghostM" id="signIn">Sign In</button>
             </div>
             <div class="overlay-panelM overlay-rightM">
-              <h1>Hello, Friend!</h1>
-              <p>Enter your personal details and start journey with us</p>
-              <button class="ghostM"  id="signUp">Sign Up</button>
+              <h2 data-lang="hello">Hello, Friend!</h2>
+              <p data-lang="infolog4">Enter your personal details and start journey with us</p>
+              <button data-lang="create-account" class="ghostM" id="signUp">Sign Up</button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="formEvent d-flex justify-content-end bg-black p-3">
+      <a  href="/pages/formEvent.html"><button class="bg-black color text-light">Create Event Proposal</button></a>
+      
     </div>
     <div
       id="carouselExampleSlidesOnly"
@@ -161,41 +165,42 @@
       </div>
       <div class="titlenewsEvents  bg-black p-lg-5">
           <div class="d-flex justify-content-center gap-1" >
-            <h2 class=" titleEvent1 bg-light d-flex justify-content-center fs-1">News</h2>
-            <h3 class="titleEvent fs-1"> Events</h3>
+            <h2 data-lang="new" class=" titleEvent1 bg-light d-flex justify-content-center fs-1">News</h2>
+            <h3 data-lang="events" class="titleEvent fs-1"> Events</h3>
           </div>
         </div>
       <div class="events d-flex  justify-content-evenly p-lg-5">
         
           <div class="nameAndDate">
-              <h2 >sun 02 nov</h2>
+              <h2 data-lang="date" >sun 02 nov</h2>
               <h1>Ritvales</h1>
               <hr>
               
           </div> 
            <div class="tickets">
-              <button class="buttonTicket">Obtener Entrada</button>
+              <button data-lang="tickets" class="buttonTicket">Obtener Entrada</button>
               <hr>
             </div>  
           <div class="nameAndDate">  
-              <h2>sun 25 may</h2>
+              <h2 data-lang="date2">sun 25 may</h2>
               <h1>Medellin Run</h1>
             <hr>
            
             </div> 
             <div class="tickets"> 
-              <a href="#"><button class="buttonTicket">Obtener Entrada</button></a><hr>
+              <button data-lang="tickets" class="buttonTicket">Obtener Entrada</button><hr>
             </div>
           </div>
       
       
     </div>
+    
     <div class="newsLetter bg-black">
       <div class="container">
-        <h1 class="pt-5 titleNewletter text-light">MANTENME AL DIA</h1>
+        <h1 data-lang="notice" class="pt-5 titleNewletter text-light">MANTENME AL DIA</h1>
         <div class="container d-flex p-5 bg-newsletter h-50 gap-5">
           <div class="w-50">
-            <p>
+            <p data-lang="info2">
               Con los últimos conciertos y eventos. Regístrate para recibir el
               boletín informativo.
             </p>
@@ -209,10 +214,11 @@
                 class="form-control border border-dark border-3"
                 id="email-newsLetter"
                 aria-describedby="emailHelp"
-                placeholder=" Ingresa tu email"
+                placeholder="@email"
               />
             </div>
             <button
+            data-lang="Subscribe"
               type="submit"
               class="subscribe border border-dark border-3 h-100 px-5 py-1"
             >
@@ -225,13 +231,13 @@
     <footer class="py-3 bg-black">
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
         <li class="nav-item">
-          <a href="#" class="nav-link px-2 text-light">Home</a>
+          <a data-lang="home" href="#" class="nav-link px-2 text-light">Home</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link px-2 text-light">Festivals</a>
+          <a data-lang="festivals" href="#" class="nav-link px-2 text-light">Festivals</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link px-2 text-light">Conferences</a>
+          <a data-lang="conferences" href="#" class="nav-link px-2 text-light">Conferences</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link px-2 text-light">FAQs</a>
