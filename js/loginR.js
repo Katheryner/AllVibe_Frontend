@@ -6,7 +6,6 @@ const logoutBtn = document.getElementById("logout");
 const loginButton = document.getElementById("logInButton");
 
 
-
 signUpButton.addEventListener("click", () => {
   container.classList.add("right-panel-activeM");
 });
@@ -37,6 +36,7 @@ logR.addEventListener("click", (e) => {
 });
 
 logClosed.addEventListener("click", (e) => {
+
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
     body.classList.remove("noScroll");
@@ -45,6 +45,7 @@ logClosed.addEventListener("click", (e) => {
   }
 });
 logC.addEventListener("click", (e) => {
+
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
     body.classList.remove("noScroll");
@@ -114,13 +115,15 @@ async function handleLogin(e) {
     });
 
     if (response.ok) {
-      console.log("Inicio de sesión exitoso");
+      
+      console.log('Inicio de sesión exitoso');
       // Redireccionar a la página de inicio después del inicio de sesión exitoso
       window.location.href = '../index.html';
       //loginButton.style.display = "none";
       //logoutBtn.style.display = "block";
 
       const token = await response.json()
+
       console.log(token);
       localStorage.setItem("token", JSON.stringify(token));
     } else {
@@ -144,7 +147,7 @@ logoutBtn.addEventListener('click', handleLogout);
     //logoutBtn.style.display = "none";
     //loginButton.style.display = "block";
   }
-
+  
 async function saveUser(user) {
   user.role = "USER";
   try {
@@ -166,7 +169,6 @@ async function saveUser(user) {
   
 }
 
-
 //Prueba
 const token = localStorage.getItem('token')
 
@@ -177,5 +179,3 @@ if(token){
   loginButton.style.display = "block";
   logoutBtn.style.display = "none";
 }
-
-
