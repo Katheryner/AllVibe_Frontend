@@ -95,10 +95,10 @@ async function printUsers() {
           <thead>
               <tr>
                   <th scope="col">ID</th>
-                  <th scope="col">Name</th>
+                  <th data-lang="inputName" scope="col">Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">Role</th>
-                  <th scope="col">Actions</th>
+                  <th data-lang="actions" scope="col">Actions</th>
               </tr>
           </thead>
           <tbody></tbody>
@@ -397,7 +397,11 @@ function formCleanEvent() {
 }
 
 function formCleanParticipation() {
-  // document.getElementById("partId").value = null;
+  document.getElementById("partId").value = null;
+  document.getElementById("roleParticipant").selectedIndex = 0;
+  document.getElementById("eventParticipation").selectedIndex = 0;
+  document.getElementById("userParticipation").selectedIndex = 0;
+
 }
 
 async function printEventInSelect() {
