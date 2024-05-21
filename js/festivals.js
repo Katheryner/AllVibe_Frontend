@@ -13,6 +13,11 @@ function verificacionLogin() {
   if (!token) {
     login.click();
     obtTickets.click();
+  }else {
+    const decodedToken = jwt_decode(token);
+    const id = decodedToken.id;
+
+  
   }
 }
 
