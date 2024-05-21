@@ -39,20 +39,17 @@ function printEvents(datos){
             <h2 class="card-title">${event.name}</h2>
             <h3 class="card-subtitle">${event.date}</h3>
             <p class="card-description">${event.description}</p>
-            
         </div>
-
         </div>
-
-
           <div class="card-footer">
-            <button class="btn-tickets">Obtener entradas</button>
+            <button data-lang="obtTickets" class="btn-tickets">Obtener entradas</button>
           </div>
-
-
-
         </div>
         `;
+      const obtTickets = document.getElementById("obtTickets");
+    obtTickets.addEventListener("click", () => {
+      verificacionLogin();
+    });
     });
 }
 
@@ -61,3 +58,15 @@ function cleanHTML() {
         card.removeChild(card.firstChild)
     }
 }
+
+function verificacionLogin() {
+  const token = localStorage.getItem("token");
+  const obtTickets = document.getElementById("obtTickets");
+
+  if (!token) {
+  
+    login.click();
+    obtTickets.click();
+    
+  }
+};

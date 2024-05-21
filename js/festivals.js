@@ -1,37 +1,48 @@
-const card = document.querySelector(".cards-content")
+const card = document.querySelector(".cards-content");
+const scrollTop = document.getElementById("scrollTop")
+const login = document.querySelector("#logR");
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    consumirAPI()
-})
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  consumirAPI();
+});
+
+function verificacionLogin() {
+  const token = localStorage.getItem("token");
+  const obtTickets = document.getElementById("obtTickets");
+
+  if (!token) {
+  
+    login.click();
+    obtTickets.click();
+    
+  }
+};
 
 async function consumirAPI() {
-    const URL = "http://localhost:8080/api/v1/events/filter/FESTIVAL"
-    const respuesta = await fetch(URL)
-    const datos = await respuesta.json()
+  const URL = "http://localhost:8080/api/v1/events/filter/FESTIVAL";
+  const respuesta = await fetch(URL);
+  const datos = await respuesta.json();
 
-    printEvents(await datos)
+  printEvents(await datos);
 }
 
-function printEvents(datos){
-    console.log(datos);
-    cleanHTML()
-    datos.forEach(event => {
+function printEvents(datos) {
+  console.log(datos);
+  cleanHTML();
+  datos.forEach((event) => {
+    const fecha = new Date(event.date);
 
-        const fecha = new Date(event.date);
+    const año = fecha.getFullYear();
+    const mes = ("0" + (fecha.getMonth() + 1)).slice(-2);
+    const día = ("0" + fecha.getDate()).slice(-2);
 
-        const año = fecha.getFullYear();
-        const mes = ('0' + (fecha.getMonth() + 1)).slice(-2);
-        const día = ('0' + fecha.getDate()).slice(-2);
+    event.date = `${año}-${mes}-${día}`;
 
-        event.date = `${año}-${mes}-${día}`;
-
-        card.innerHTML += `
+    card.innerHTML += `
         <div class="card">
-
           <div class="card_animation">
-
-
             <div class="card-image">
               <img src="/img/coachella.jpg" alt="Card Image">
             </div>
@@ -39,25 +50,23 @@ function printEvents(datos){
             <h2 class="card-title">${event.name}</h2>
             <h3 class="card-subtitle">${event.date}</h3>
             <p class="card-description">${event.description}</p>
-            
         </div>
-
         </div>
-
-
           <div class="card-footer">
-            <button class="btn-tickets">Obtener entradas</button>
+            <button id="obtTickets" data-lang="obtTickets" class="btn-tickets">Obtener entradas</button>
           </div>
-
-
-
         </div>
         `;
+
+    const obtTickets = document.getElementById("obtTickets");
+    obtTickets.addEventListener("click", () => {
+      verificacionLogin();
     });
+  });
 }
 
 function cleanHTML() {
-    while (card.firstChild) {
-        card.removeChild(card.firstChild)
-    }
+  while (card.firstChild) {
+    card.removeChild(card.firstChild);
+  }
 }

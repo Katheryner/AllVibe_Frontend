@@ -8,7 +8,8 @@ body {
 }
 
 .noScroll{
-  overflow: hidden;}
+  overflow: hidden;
+}
 
 .modalContentM {
   backdrop-filter: blur(5px);
@@ -24,6 +25,7 @@ body {
 }
 
 .modalContentM.disebled_ {
+  
   pointer-events: none;
   opacity: 0;
   z-index: 0;

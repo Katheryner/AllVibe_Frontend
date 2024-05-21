@@ -13,24 +13,30 @@ signInButton.addEventListener("click", () => {
 });
 
 const modal = document.getElementById("modalContentM");
-const body = document.getElementById("body");
+const body = document.querySelector("body");
 const logR = document.getElementById("logR");
 const logClosed = document.getElementById("logC");
 const logC = document.getElementById("logCd");
 
+
+
 logR.addEventListener("click", (e) => {
   e.preventDefault();
-
+console.log("entro");
   if (
     modal.classList.contains("initial_disabled") ||
     modal.classList.contains("disebled_")
   ) {
+      window.location.href = "#header"
     modal.classList.remove("initial_disabled");
     modal.classList.add("disebled_");
     modal.classList.add("action_look");
     body.classList.add("noScroll");
   }
 });
+
+
+
 logClosed.addEventListener("click", (e) => {
   
   e.preventDefault();
