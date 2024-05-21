@@ -83,8 +83,13 @@ async function handleSubmit(e) {
     if (response.ok) {
       console.log("Registro exitoso");
       signInButton.click();
+      alert("Successful registration")
       await saveUser(formData);
     } else {
+      username.value="";
+      email.value="";
+      password.value="";
+      alert("Failed Register, try again!");
       console.error("Error en el registro uno");
     }
   } catch (error) {
