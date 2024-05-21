@@ -5,6 +5,7 @@ const participationsButtton = document.querySelector("#participations-buttton");
 const usersButtton = document.querySelector("#users-buttton");
 const createEventButton = document.querySelector("#saveEvent");
 const createPartButton = document.querySelector("#saveParticipation");
+
 //listeners
 document.addEventListener("DOMContentLoaded", () => {
   printEvents();
@@ -216,25 +217,31 @@ async function printEvents() {
   console.log(data);
   cleanHTML(tables);
   tables.innerHTML += `<div>
-    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEvent"> Create a new event </button>
+    <button id="createNewEvent" data-lang="newEvent" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEvent"> Create a new event </button>
   </div>
 
   <table class="table table-striped table-hover table-dark">
     <thead>
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Status</th>
-        <th scope="col">Date</th>
-        <th scope="col">Capacity</th>
-        <th scope="col">Place</th>
-        <th scope="col">Descripion</th>
-        <th scope="col">EventType</th>
-        <th scope="col">Actions</th>
+              <th data-lang="inputName" scope="col">Name</th>
+              <th data-lang="inputStatus" scope="col">Status</th>
+              <th data-lang="inputDate" scope="col">Date</th>
+              <th data-lang="inputCapacity" scope="col">Capacity</th>
+              <th data-lang="inputPlace" scope="col">Place</th>
+              <th data-lang="inputDescription" scope="col">Descripion</th>
+              <th data-lang="inputEventType" scope="col">EventType</th>
+              <th data-lang="actions" scope="col">Actions</th>
       </tr>
     </thead>
     <tbody></tbody>
     </table>`;
+  
+  const buttonCreateEvent = document.getElementById("createNewEvent");
+  buttonCreateEvent.addEventListener("click", () => {
+  formCleanEvent();
+});
+  
   data["content"].forEach((event) => {
     const fecha = new Date(event.date);
 
@@ -291,27 +298,33 @@ async function printParticipations() {
   console.log(data);
   cleanHTML(tables);
   tables.innerHTML += `<div>
-      <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEventParticipation" id="modalPartButton"> Create a new participation </button>
+      <button id="createNewP" data-lang="newParticipation" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEventParticipation"> Create a new participation </button>
     </div>
   
     <table class="table table-striped table-hover table-dark">
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Username</th>
-          <th scope="col">Role in event</th>
-          <th scope="col">Event name</th>
-          <th scope="col">Status</th>
-          <th scope="col">Date</th>
-          <th scope="col">Place</th>
-          <th scope="col">EventType</th>
-          <th scope="col">Actions</th>
+          <th data-lang="username" scope="col">Username</th>
+          <th data-lang="inputRol" scope="col">Role in event</th>
+          <th data-lang="eventname" scope="col">Event name</th>
+          <th data-lang="inputStatus" scope="col">Status</th>
+          <th data-lang="inputDate" scope="col">Date</th>
+          <th data-lang="inputPlace" scope="col">Place</th>
+          <th data-lang="inputEventType" scope="col">EventType</th>
+          <th data-lang="actions" scope="col">Actions</th>
         </tr>
       </thead>
       <tbody></tbody>
       </table>`;
+  
+  const buttonCreatePart = document.getElementById("createNewP");
+  
+  buttonCreatePart.addEventListener("click", () => {
+    formCleanParticipation();
+  });
 
-  tables.querySelector("#modalPartButton").addEventListener("click", () => {
+  tables.querySelector("#createNewP").addEventListener("click", () => {
     printEventInSelect();
     printUsersInSelect();
   });
@@ -372,6 +385,21 @@ function cleanHTML(element) {
   }
 }
 
+function formCleanEvent() {
+  document.getElementById("eventId").value = null;
+  document.getElementById("nameEvent").value = "";
+  document.getElementById("placeEvent").value = "";
+  document.getElementById("dateEvent").value = "";
+  document.getElementById("capacityEvent").value = "";
+  document.getElementById("descriptionEvent").value = "";
+  document.getElementById("eventType").selectedIndex = 0;
+  document.getElementById("statusEvent").selectedIndex = 0;
+}
+
+function formCleanParticipation() {
+  // document.getElementById("partId").value = null;
+}
+
 async function printEventInSelect() {
   const selectEvent = document.querySelector("#eventParticipation");
   cleanHTML(selectEvent);
@@ -426,8 +454,10 @@ async function printFormParticipation(id) {
   await printEventInSelect();
   await printUsersInSelect();
   document.getElementById("roleParticipant").value = data.participantRole;
-  document.getElementById("eventParticipation").value = data.simpleEventResponse.id;
-  document.getElementById("userParticipation").value = data.simpleUserResponse.id;
+  document.getElementById("eventParticipation").value =
+    data.simpleEventResponse.id;
+  document.getElementById("userParticipation").value =
+    data.simpleUserResponse.id;
   document.getElementById("partId").value = data.id;
 }
 
@@ -518,7 +548,7 @@ async function saveParticipation() {
       console.error("Error adding participation:", error);
     }
   } else {
-    updateParticipation(id,participation);
+    updateParticipation(id, participation);
   }
 }
 

@@ -2,6 +2,8 @@ const signUpButton = document.getElementById("signUp");
 const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
 
+
+
 signUpButton.addEventListener("click", () => {
   container.classList.add("right-panel-activeM");
 });
@@ -10,7 +12,7 @@ signInButton.addEventListener("click", () => {
   container.classList.remove("right-panel-activeM");
 });
 
-const modal = document.getElementById("modalContent");
+const modal = document.getElementById("modalContentM");
 const body = document.getElementById("body");
 const logR = document.getElementById("logR");
 const logClosed = document.getElementById("logC");
@@ -149,6 +151,8 @@ async function saveUser(user) {
   } catch (error) {
     console.error('Error:', error);
   }
+
+  
 }
 
 
