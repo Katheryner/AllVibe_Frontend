@@ -82,8 +82,16 @@ async function handleSubmit(e) {
 
     if (response.ok) {
       console.log("Registro exitoso");
+      signInButton.click();
+      document.getElementById("username").value="";
+      document.getElementById("emailRegister").value="";
+      document.getElementById("passwordRegister").value="";
       await saveUser(formData);
     } else {
+      document.getElementById("username").value="";
+      document.getElementById("emailRegister").value="";
+      document.getElementById("passwordRegister").value="";
+      alert("Failed Register, try again!");
       console.error("Error en el registro uno");
     }
   } catch (error) {
