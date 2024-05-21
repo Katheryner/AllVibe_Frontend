@@ -154,6 +154,7 @@ logoutBtn.addEventListener('click', handleLogout);
     //logoutBtn.style.display = "none";
     //loginButton.style.display = "block";
   }
+  
 
 async function saveUser(user) {
   user.role = "USER";
