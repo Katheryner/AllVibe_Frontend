@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function verificacionLogin() {
   const token = localStorage.getItem("token");
-  const obtTickets = document.getElementById("obtTickets");
+  const obtTickets = document.querySelector(".obtTickets");
 
   if (!token) {
   
@@ -53,15 +53,10 @@ function printEvents(datos) {
         </div>
         </div>
           <div class="card-footer">
-            <button data-lang="obtTickets" class="btn-tickets obtTickets">Obtener entradas</button>
+            <button data-lang="obtTickets" onClick="verificacionLogin()" class="btn-tickets obtTickets">Obtener entradas</button>
           </div>
         </div>
         `;
-
-    const obtTickets = document.querySelector(".obtTickets");
-    obtTickets.addEventListener("click", () => {
-      verificacionLogin();
-    });
   });
 }
 
