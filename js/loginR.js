@@ -2,6 +2,9 @@ const signUpButton = document.getElementById("signUp");
 const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
 
+const logoutBtn = document.getElementById("logout");
+const loginButton = document.getElementById("logInButton");
+
 
 
 signUpButton.addEventListener("click", () => {
@@ -33,6 +36,7 @@ logR.addEventListener("click", (e) => {
 });
 logClosed.addEventListener("click", (e) => {
   
+  
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
     body.classList.remove("noScroll");
@@ -41,6 +45,7 @@ logClosed.addEventListener("click", (e) => {
   }
 });
 logC.addEventListener("click", (e) => {
+  
   
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
@@ -78,10 +83,11 @@ async function handleSubmit(e) {
       
     });
     console.log(response);
-   
+
+
     if (response.ok) {
       console.log('Registro exitoso');
-     await saveUser(formData);
+    await saveUser(formData);
 
     } else {
       console.error('Error en el registro uno');
@@ -117,9 +123,13 @@ async function handleLogin(e) {
     });
 
     if (response.ok) {
+      
       console.log('Inicio de sesión exitoso');
       // Redireccionar a la página de inicio después del inicio de sesión exitoso
-      //window.location.href = 'https://cloud.mongodb.com/v2/66307a9e5d04d15827e370f1#/overview';
+      window.location.href = '../index.html';
+      //loginButton.style.display = "none";
+      //logoutBtn.style.display = "block";
+
       const token = await response.json()
       console.log(token);
       localStorage.setItem('token', JSON.stringify(token))
@@ -129,8 +139,21 @@ async function handleLogin(e) {
   } catch (error) {
     console.error('Error en el inicio de sesión:', error);
   }
-}
 
+  
+}
+logoutBtn.addEventListener('click', handleLogout);
+
+  function handleLogout() {
+
+    localStorage.removeItem('token');
+    window.location.href = '../index.html';
+
+    console.log('Sesión cerrada');
+    
+    //logoutBtn.style.display = "none";
+    //loginButton.style.display = "block";
+  }
 
 async function saveUser(user) {
   user.role = "USER";
@@ -143,7 +166,7 @@ async function saveUser(user) {
       body: JSON.stringify(user),
       
     });
-   
+  
     if (response.ok) {
       console.log('success User');
 
@@ -156,7 +179,15 @@ async function saveUser(user) {
 }
 
 
+//Prueba
+const token = localStorage.getItem('token')
 
-
+if(token){
+  loginButton.style.display = "none";
+  logoutBtn.style.display = "block";
+}else{
+  loginButton.style.display = "block";
+  logoutBtn.style.display = "none";
+}
 
 

@@ -96,3 +96,7 @@ header{
     color: #FC9779;
     
 }
+
+.logout{
+    display: none;
+}
