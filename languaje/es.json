@@ -64,5 +64,6 @@
   "newParticipation":"Crear una nueva participación",
   "inputRol":"Función en el evento",
   "eventname":"Nombre del evento",
-  "createEventProposal":"Crear propuesta de evento"
+  "createEventProposal":"Crear propuesta de evento",
+  "admin":"Admin"
 }

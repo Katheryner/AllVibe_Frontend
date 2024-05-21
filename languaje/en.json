@@ -64,6 +64,7 @@
   "newParticipation":"Create a new participation",
   "inputRol":"Role in event",
   "eventname":"Event name",
-  "createEventProposal":"Create Event Proposal"
+  "createEventProposal":"Create Event Proposal",
+  "admin":"Admin"
 
 }
