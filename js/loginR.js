@@ -6,7 +6,6 @@ const logoutBtn = document.getElementById("logout");
 const loginButton = document.getElementById("logInButton");
 
 
-
 signUpButton.addEventListener("click", () => {
   container.classList.add("right-panel-activeM");
 });
@@ -15,28 +14,29 @@ signInButton.addEventListener("click", () => {
   container.classList.remove("right-panel-activeM");
 });
 
-const modal = document.getElementById("modalContent");
-const body = document.getElementById("body");
+const modal = document.getElementById("modalContentM");
+const body = document.querySelector("body");
 const logR = document.getElementById("logR");
 const logClosed = document.getElementById("logC");
 const logC = document.getElementById("logCd");
 
 logR.addEventListener("click", (e) => {
   e.preventDefault();
-
+  console.log("entro");
   if (
     modal.classList.contains("initial_disabled") ||
     modal.classList.contains("disebled_")
   ) {
+    window.location.href = "#header";
     modal.classList.remove("initial_disabled");
     modal.classList.add("disebled_");
     modal.classList.add("action_look");
     body.classList.add("noScroll");
   }
 });
+
 logClosed.addEventListener("click", (e) => {
-  
-  
+
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
     body.classList.remove("noScroll");
@@ -45,8 +45,7 @@ logClosed.addEventListener("click", (e) => {
   }
 });
 logC.addEventListener("click", (e) => {
-  
-  
+
   e.preventDefault();
   if (modal.classList.contains("action_look")) {
     body.classList.remove("noScroll");
@@ -55,69 +54,62 @@ logC.addEventListener("click", (e) => {
   }
 });
 
+const btn = document.getElementById("Sign");
 
-
-const btn = document.getElementById('Sign');
-
-btn.addEventListener('click', handleSubmit);
+btn.addEventListener("click", handleSubmit);
 
 async function handleSubmit(e) {
   e.preventDefault();
-  const username = document.getElementById('username').value;
-  const email = document.getElementById('emailRegister').value;
-  const password = document.getElementById('passwordRegister').value;
+  const username = document.getElementById("username").value;
+  const email = document.getElementById("emailRegister").value;
+  const password = document.getElementById("passwordRegister").value;
 
   const formData = {
     username: username,
     email: email,
-    password: password
+    password: password,
   };
 
   try {
-    const response = await fetch('http://localhost:3000/auth/register', {
-      method: 'POST',
+    const response = await fetch("http://localhost:3000/auth/register", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-      
     });
     console.log(response);
 
-
     if (response.ok) {
-      console.log('Registro exitoso');
-    await saveUser(formData);
-
+      console.log("Registro exitoso");
+      await saveUser(formData);
     } else {
-      console.error('Error en el registro uno');
+      console.error("Error en el registro uno");
     }
   } catch (error) {
-    console.error('Error en el registro:', error);
+    console.error("Error en el registro:", error);
   }
 }
 
+const loginBtn = document.getElementById("loginBtn");
 
-
-const loginBtn = document.getElementById('loginBtn');
-
-loginBtn.addEventListener('click', handleLogin);
+loginBtn.addEventListener("click", handleLogin);
 
 async function handleLogin(e) {
   e.preventDefault();
-  const email = document.getElementById('emailLogin').value;
-  const password = document.getElementById('passwordLogin').value;
+  const email = document.getElementById("emailLogin").value;
+  const password = document.getElementById("passwordLogin").value;
 
   const formData = {
     email: email,
-    password: password
+    password: password,
   };
 
   try {
-    const response = await fetch('http://localhost:3000/auth/login', {
-      method: 'POST',
+    const response = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     });
@@ -131,13 +123,14 @@ async function handleLogin(e) {
       //logoutBtn.style.display = "block";
 
       const token = await response.json()
+
       console.log(token);
-      localStorage.setItem('token', JSON.stringify(token))
+      localStorage.setItem("token", JSON.stringify(token));
     } else {
-      console.error('Error en el inicio de sesión');
+      console.error("Error en el inicio de sesión");
     }
   } catch (error) {
-    console.error('Error en el inicio de sesión:', error);
+    console.error("Error en el inicio de sesión:", error);
   }
 
   
@@ -155,30 +148,24 @@ logoutBtn.addEventListener('click', handleLogout);
     //loginButton.style.display = "block";
   }
   
-
 async function saveUser(user) {
   user.role = "USER";
   try {
-    const response = await fetch('http://localhost:8080/api/v1/users', {
-      method: 'POST',
+    const response = await fetch("http://localhost:8080/api/v1/users", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
-      
     });
-  
-    if (response.ok) {
-      console.log('success User');
 
+    if (response.ok) {
+      console.log("success User");
     }
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
-
-  
 }
-
 
 //Prueba
 const token = localStorage.getItem('token')

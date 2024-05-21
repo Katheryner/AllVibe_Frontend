@@ -87,6 +87,7 @@ h1 {
 
 
 .card {
+    overflow: hidden;
     border: none;
     color: #fff;
     min-width: 30%;

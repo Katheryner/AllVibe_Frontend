@@ -5,6 +5,7 @@ const participationsButtton = document.querySelector("#participations-buttton");
 const usersButtton = document.querySelector("#users-buttton");
 const createEventButton = document.querySelector("#saveEvent");
 const createPartButton = document.querySelector("#saveParticipation");
+
 //listeners
 document.addEventListener("DOMContentLoaded", () => {
   printEvents();
@@ -25,6 +26,9 @@ createEventButton.addEventListener("click", () => {
 createPartButton.addEventListener("click", () => {
   saveParticipation();
 });
+
+usersButtton.addEventListener('click', () => {
+  printUsers(); } )
 
 //functions
 
@@ -62,32 +66,182 @@ async function consumirAPIUsers() {
   }
 }
 
-//prints
+
+async function consumeAPIUsersNestJS() {
+  try {
+    const URL = "http://localhost:3000/user";
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data["data"]
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+//prints users 
+async function printUsers() {
+  const data = await consumeAPIUsersNestJS();
+  console.log(data);
+
+  // Limpia la tabla de usuarios antes de imprimir los nuevos usuarios
+  cleanHTML(tables);
+
+  // Crea una nueva tabla para los usuarios
+  tables.innerHTML += `
+      <div>
+          <h2>Users</h2>
+      </div>
+      <table class="table table-striped table-hover table-dark">
+          <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Actions</th>
+              </tr>
+          </thead>
+          <tbody></tbody>
+      </table>`;
+
+  // Itera sobre los usuarios y agrega filas a la tabla
+  data.forEach((user) => {
+      tables.querySelector("tbody").innerHTML += `
+          <tr>
+              <td>${user._id}</td>
+              <td>${user.username}</td>
+              <td>${user.email}</td>
+              <td>${user.role}</td>
+              <td>
+              <button type="button" class="btn btn-primary edit-user-btn" data-bs-toggle="modal" data-bs-target="#
+              cn" data-id="${user._id}">
+                Edit
+              </button>
+              </td>
+          </tr>`;
+          
+  });
+  tables.querySelectorAll(".edit-user-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      
+      const userId = button.getAttribute("data-id");
+      console.log(userId); 
+      fetch("http://localhost:3000/user/"+ userId).then(e => e.json()).then(d => {
+        document.getElementById("editEmail").value = d.data.email;
+        document.getElementById("editUsername").value = d.data.username;
+        document.getElementById("editRole").value = d.data.role;
+        console.log(data);
+      })
+      printEditUserForm(userId);
+    });
+  });
+
+  // Añade el evento 'click' a los botones de edición después de actualizar la tabla
+
+}
+
+async function printEditUserForm(userId) {
+  // Obtener los datos del usuario por su ID
+  // const userData = await getUserById(userId);
+
+  // Rellenar el formulario de edición de usuario con los datos del usuario
+  document.getElementById("editUserId").value = userId._id;
+  document.getElementById("editUsername").value = userId.username;
+  document.getElementById("editEmail").value = userId.email;
+  document.getElementById("editRole").value = userId.role;
+
+  // Mostrar el modal de edición de usuario
+  const modalElement = document.getElementById("editUserModal");
+  const modalInstance = new bootstrap.Modal(modalElement);
+  modalInstance.show();
+}
+
+// Selecciona el botón de "Guardar cambios" en el modal de edición
+const saveChangesBtn = document.getElementById("saveChangesBtn");
+
+// Añade un event listener al botón de "Guardar cambios"
+saveChangesBtn.addEventListener("click", async () => {
+  // Obtén los nuevos detalles del usuario del formulario de edición
+  const userId = document.getElementById("editUserId").value;
+  const newUsername = document.getElementById("editUsername").value;
+  const newEmail = document.getElementById("editEmail").value;
+  const newRole = document.getElementById("editRole").value;
+
+  // Crea un objeto con los nuevos detalles del usuario
+  const updatedUser = {
+    username: newUsername,
+    email: newEmail,
+    role: newRole
+  };
+
+  // Envía una solicitud PUT al servidor para actualizar el usuario
+  await updateUser(userId, updatedUser);
+
+  // Cierra el modal de edición
+  const modalElement = document.getElementById("editUserModal");
+  const modalInstance = bootstrap.Modal.getInstance(modalElement);
+  modalInstance.hide();
+
+  // Vuelve a imprimir la tabla de usuarios para reflejar los cambios
+  printUsers();
+});
+
+// Función para enviar una solicitud PUT al servidor para actualizar el usuario
+async function updateUser(userId, updatedUserDetails) {
+  const URL = `ttp://localhost:3000/user/${user._id}`;
+  try {
+    const response = await fetch(URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedUserDetails)
+    });
+
+    if (response.ok) {
+      console.log("Usuario actualizado exitosamente");
+    } else {
+      console.error("Error al actualizar el usuario");
+    }
+    
+  } catch (error) {
+    console.error("Error al actualizar el usuario:", error);
+  }
+}
+
+
+//prints events
 
 async function printEvents() {
   const data = await consumirAPIEvents();
   console.log(data);
   cleanHTML(tables);
   tables.innerHTML += `<div>
-    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEvent"> Create a new event </button>
+    <button id="createNewEvent" data-lang="newEvent" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEvent"> Create a new event </button>
   </div>
 
   <table class="table table-striped table-hover table-dark">
     <thead>
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Status</th>
-        <th scope="col">Date</th>
-        <th scope="col">Capacity</th>
-        <th scope="col">Place</th>
-        <th scope="col">Descripion</th>
-        <th scope="col">EventType</th>
-        <th scope="col">Actions</th>
+              <th data-lang="inputName" scope="col">Name</th>
+              <th data-lang="inputStatus" scope="col">Status</th>
+              <th data-lang="inputDate" scope="col">Date</th>
+              <th data-lang="inputCapacity" scope="col">Capacity</th>
+              <th data-lang="inputPlace" scope="col">Place</th>
+              <th data-lang="inputDescription" scope="col">Descripion</th>
+              <th data-lang="inputEventType" scope="col">EventType</th>
+              <th data-lang="actions" scope="col">Actions</th>
       </tr>
     </thead>
     <tbody></tbody>
     </table>`;
+  
+  const buttonCreateEvent = document.getElementById("createNewEvent");
+  buttonCreateEvent.addEventListener("click", () => {
+  formCleanEvent();
+});
+  
   data["content"].forEach((event) => {
     const fecha = new Date(event.date);
 
@@ -144,27 +298,33 @@ async function printParticipations() {
   console.log(data);
   cleanHTML(tables);
   tables.innerHTML += `<div>
-      <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEventParticipation" id="modalPartButton"> Create a new participation </button>
+      <button id="createNewP" data-lang="newParticipation" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalEventParticipation"> Create a new participation </button>
     </div>
   
     <table class="table table-striped table-hover table-dark">
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Username</th>
-          <th scope="col">Role in event</th>
-          <th scope="col">Event name</th>
-          <th scope="col">Status</th>
-          <th scope="col">Date</th>
-          <th scope="col">Place</th>
-          <th scope="col">EventType</th>
-          <th scope="col">Actions</th>
+          <th data-lang="username" scope="col">Username</th>
+          <th data-lang="inputRol" scope="col">Role in event</th>
+          <th data-lang="eventname" scope="col">Event name</th>
+          <th data-lang="inputStatus" scope="col">Status</th>
+          <th data-lang="inputDate" scope="col">Date</th>
+          <th data-lang="inputPlace" scope="col">Place</th>
+          <th data-lang="inputEventType" scope="col">EventType</th>
+          <th data-lang="actions" scope="col">Actions</th>
         </tr>
       </thead>
       <tbody></tbody>
       </table>`;
+  
+  const buttonCreatePart = document.getElementById("createNewP");
+  
+  buttonCreatePart.addEventListener("click", () => {
+    formCleanParticipation();
+  });
 
-  tables.querySelector("#modalPartButton").addEventListener("click", () => {
+  tables.querySelector("#createNewP").addEventListener("click", () => {
     printEventInSelect();
     printUsersInSelect();
   });
@@ -225,6 +385,21 @@ function cleanHTML(element) {
   }
 }
 
+function formCleanEvent() {
+  document.getElementById("eventId").value = null;
+  document.getElementById("nameEvent").value = "";
+  document.getElementById("placeEvent").value = "";
+  document.getElementById("dateEvent").value = "";
+  document.getElementById("capacityEvent").value = "";
+  document.getElementById("descriptionEvent").value = "";
+  document.getElementById("eventType").selectedIndex = 0;
+  document.getElementById("statusEvent").selectedIndex = 0;
+}
+
+function formCleanParticipation() {
+  // document.getElementById("partId").value = null;
+}
+
 async function printEventInSelect() {
   const selectEvent = document.querySelector("#eventParticipation");
   cleanHTML(selectEvent);
@@ -279,8 +454,10 @@ async function printFormParticipation(id) {
   await printEventInSelect();
   await printUsersInSelect();
   document.getElementById("roleParticipant").value = data.participantRole;
-  document.getElementById("eventParticipation").value = data.simpleEventResponse.id;
-  document.getElementById("userParticipation").value = data.simpleUserResponse.id;
+  document.getElementById("eventParticipation").value =
+    data.simpleEventResponse.id;
+  document.getElementById("userParticipation").value =
+    data.simpleUserResponse.id;
   document.getElementById("partId").value = data.id;
 }
 
@@ -371,7 +548,7 @@ async function saveParticipation() {
       console.error("Error adding participation:", error);
     }
   } else {
-    updateParticipation(id,participation);
+    updateParticipation(id, participation);
   }
 }
 
