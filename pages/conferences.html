@@ -39,10 +39,21 @@
         </div>
         <div class="login">
           <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item" id="logInButton" id="logInButton">
               <a id="logR" href="#" class="nav-link text-light" aria-disabled="true"
                 data-lang="login">Login/Register</a>
             </li>
+
+            <li class="nav-item" id="logout">
+              <a
+                id="logOut"
+                href="/index.html"
+                class="nav-link text-light"
+                aria-disabled="true"
+                >Logout</a
+              >
+            </li>
+
             <li class="nav-item">
               <a class="nav-link text-light change-language" aria-disabled="true" data-lang="es/en" href="#">ES/EN</a>
             </li>
@@ -61,7 +72,7 @@
           <input type="text" placeholder="Name" id="username"/>
           <input type="email" placeholder="Email" id="emailRegister" />
           <input type="password" placeholder="Password" id="passwordRegister" />
-          <button data-lang="button-signUp">Sign Up</button>
+          <button id="Sign">Sign Up</button>
         </form>
       </div>
       <div class="form-containerM sign-in-containerM">
@@ -71,7 +82,8 @@
           <span data-lang="infoLog2" >or use your account</span>
           <input type="email" placeholder="Email" id="emailLogin"/>
           <input type="password" placeholder="Password" id="passwordLogin"/>
-          <button data-lang="button-signIn">Sign In</button>
+          <a href="#">Forgot your password?</a>
+          <button id="loginBtn">Sign In</button>
         </form>
       </div>
       <div class="overlay-containerM">

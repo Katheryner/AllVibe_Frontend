@@ -2,6 +2,11 @@ const signUpButton = document.getElementById("signUp");
 const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
 
+const logoutBtn = document.getElementById("logout");
+const loginButton = document.getElementById("logInButton");
+
+
+
 signUpButton.addEventListener("click", () => {
   container.classList.add("right-panel-activeM");
 });
@@ -111,8 +116,11 @@ async function handleLogin(e) {
     if (response.ok) {
       console.log("Inicio de sesión exitoso");
       // Redireccionar a la página de inicio después del inicio de sesión exitoso
-      //window.location.href = 'https://cloud.mongodb.com/v2/66307a9e5d04d15827e370f1#/overview';
-      const token = await response.json();
+      window.location.href = '../index.html';
+      //loginButton.style.display = "none";
+      //logoutBtn.style.display = "block";
+
+      const token = await response.json()
       console.log(token);
       localStorage.setItem("token", JSON.stringify(token));
     } else {
@@ -121,7 +129,21 @@ async function handleLogin(e) {
   } catch (error) {
     console.error("Error en el inicio de sesión:", error);
   }
+
+  
 }
+logoutBtn.addEventListener('click', handleLogout);
+
+  function handleLogout() {
+
+    localStorage.removeItem('token');
+    window.location.href = '../index.html';
+
+    console.log('Sesión cerrada');
+    
+    //logoutBtn.style.display = "none";
+    //loginButton.style.display = "block";
+  }
 
 async function saveUser(user) {
   user.role = "USER";
@@ -140,4 +162,20 @@ async function saveUser(user) {
   } catch (error) {
     console.error("Error:", error);
   }
+
+  
 }
+
+
+//Prueba
+const token = localStorage.getItem('token')
+
+if(token){
+  loginButton.style.display = "none";
+  logoutBtn.style.display = "block";
+}else{
+  loginButton.style.display = "block";
+  logoutBtn.style.display = "none";
+}
+
+
