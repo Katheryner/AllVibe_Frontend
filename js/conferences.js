@@ -1,4 +1,5 @@
 const card = document.querySelector(".cards-content")
+const login = document.querySelector("#logR");
 
 document.addEventListener("DOMContentLoaded", ()=>{
     consumirAPI()
