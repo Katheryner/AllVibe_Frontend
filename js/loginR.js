@@ -190,5 +190,3 @@ if(token){
   loginButton.style.display = "block";
   logoutBtn.style.display = "none";
 }
-
-
