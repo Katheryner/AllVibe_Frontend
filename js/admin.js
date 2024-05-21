@@ -202,6 +202,7 @@ async function updateUser(userId, updatedUserDetails) {
     } else {
       console.error("Error al actualizar el usuario");
     }
+    
   } catch (error) {
     console.error("Error al actualizar el usuario:", error);
   }
