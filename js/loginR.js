@@ -82,6 +82,7 @@ async function handleSubmit(e) {
 
     if (response.ok) {
       console.log("Registro exitoso");
+      signInButton.click();
       await saveUser(formData);
     } else {
       console.error("Error en el registro uno");
