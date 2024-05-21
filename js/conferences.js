@@ -1,33 +1,31 @@
-const card = document.querySelector(".cards-content")
+const card = document.querySelector(".cards-content");
 const login = document.querySelector("#logR");
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    consumirAPI()
-})
-
+document.addEventListener("DOMContentLoaded", () => {
+  consumirAPI();
+});
 
 async function consumirAPI() {
-    const URL = "http://localhost:8080/api/v1/events/filter/CONFERENCE"
-    const respuesta = await fetch(URL)
-    const datos = await respuesta.json()
+  const URL = "http://localhost:8080/api/v1/events/filter/CONFERENCE";
+  const respuesta = await fetch(URL);
+  const datos = await respuesta.json();
 
-    printEvents(await datos)
+  printEvents(await datos);
 }
 
-function printEvents(datos){
-    console.log(datos);
-    cleanHTML()
-    datos.forEach(event => {
+function printEvents(datos) {
+  console.log(datos);
+  cleanHTML();
+  datos.forEach((event) => {
+    const fecha = new Date(event.date);
 
-        const fecha = new Date(event.date);
+    const año = fecha.getFullYear();
+    const mes = ("0" + (fecha.getMonth() + 1)).slice(-2);
+    const día = ("0" + fecha.getDate()).slice(-2);
 
-        const año = fecha.getFullYear();
-        const mes = ('0' + (fecha.getMonth() + 1)).slice(-2);
-        const día = ('0' + fecha.getDate()).slice(-2);
+    event.date = `${año}-${mes}-${día}`;
 
-        event.date = `${año}-${mes}-${día}`;
-
-        card.innerHTML += `
+    card.innerHTML += `
         <div class="card">
 
           <div class="card_animation">
@@ -47,13 +45,13 @@ function printEvents(datos){
           </div>
         </div>
         `;
-    });
+  });
 }
 
 function cleanHTML() {
-    while (card.firstChild) {
-        card.removeChild(card.firstChild)
-    }
+  while (card.firstChild) {
+    card.removeChild(card.firstChild);
+  }
 }
 
 function verificacionLogin() {
@@ -61,9 +59,7 @@ function verificacionLogin() {
   const obtTickets = document.querySelector(".obtTickets");
 
   if (!token) {
-  
     login.click();
     obtTickets.click();
-    
   }
-};
+}

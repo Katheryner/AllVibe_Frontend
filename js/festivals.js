@@ -1,8 +1,6 @@
 const card = document.querySelector(".cards-content");
-const scrollTop = document.getElementById("scrollTop")
+const scrollTop = document.getElementById("scrollTop");
 const login = document.querySelector("#logR");
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
   consumirAPI();
@@ -13,12 +11,10 @@ function verificacionLogin() {
   const obtTickets = document.querySelector(".obtTickets");
 
   if (!token) {
-  
     login.click();
     obtTickets.click();
-    
   }
-};
+}
 
 async function consumirAPI() {
   const URL = "http://localhost:8080/api/v1/events/filter/FESTIVAL";
