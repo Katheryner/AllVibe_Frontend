@@ -39,16 +39,6 @@
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a
-                  id="logR"
-                  href="#"
-                  class="nav-link text-light"
-                  aria-disabled="true"
-                  data-lang="login"
-                  >Logout</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
                   class="nav-link text-light change-language"
                   aria-disabled="true"
                   data-lang="es/en"
@@ -285,6 +275,44 @@
       </div>
     </div>
 
+    <!--Modal Users-->
+
+<!-- Modal de edición de usuario -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="edit-user-btn">Editar Usuario</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Formulario de edición de usuario -->
+              <form id="editUserForm">
+                  <input type="hidden" id="editUserId">
+                  <div class="mb-3">
+                      <label for="editUsername" class="form-label">Nombre de Usuario</label>
+                      <input type="text" class="form-control" id="editUsername">
+                  </div>
+                  <div class="mb-3">
+                      <label for="editEmail" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="editEmail">
+                  </div>
+                  <div class="mb-3">
+                      <label for="editRole" class="form-label">Role</label>
+                      <input type="text" class="form-control" id="editRole">
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id="saveChangesBtn">Guardar Cambios</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
     <!-- Modal participation -->
 
     <div
@@ -370,6 +398,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="/js/admin.js"></script>
+    <script src="/js/users.js"></script>
     <script src="/js/traslatorAdmin.js"></script>
     <script src="/js/loginR.js"></script>
   </body>
